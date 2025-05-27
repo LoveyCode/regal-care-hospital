@@ -70,7 +70,6 @@ formData.append('fileName', values.identificationDocument[0].name)
     identificationDocument: formData
   }
 
-  //@ts-ignore
   const patient = await registerPatient(patientData);
 
   if (patient) router.push(`/patients/${user.$id}/new-appointment`);

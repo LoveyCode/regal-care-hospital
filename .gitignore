@@ -38,6 +38,7 @@ next-env.d.ts
 # Sentry Config File
 .env.sentry-build-plugin
 
-components/Message.tsx
+src/components/ThemeToggleExplain.tsx
 
-components/ThemeToggleExplain.tsx
+
+
