@@ -8,7 +8,9 @@ const Register = async ({params: {userId}} : SearchParamProps) => {
   //watch next.js video on dynamic routes to get more understanding on it. 
     const user = await getUser(userId)
 
-
+  if (!user) {
+    return <div className="text-center mt-20 text-red-500">User not found</div>;
+  }
 
   return (
     <div className="block h-full bg-zinc-100 dark:bg-zinc-900 text-zinc-500 dark:text-zinc-200">
