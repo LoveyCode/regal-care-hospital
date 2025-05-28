@@ -8,6 +8,14 @@ import { Appointment } from "../../../types/appwrite.type";
 
 
 
+export type AppointmentStats = {
+  scheduledCount: number;
+  pendingCount: number;
+  cancelledCount: number;
+  documents: any[];
+};
+
+
 export const isDoctorAvailable = async (doctorName: string, schedule: Date) => {
   try {
     const result = await databases.listDocuments(
@@ -57,7 +65,7 @@ return parseStringify (appointment);
     
 }
 }
-export const getRecentAppointmentList = async () => {
+export const getRecentAppointmentList = async (): Promise<AppointmentStats | undefined> => {
     try {
       const appointments = await databases.listDocuments(
         DATABASE_ID!,

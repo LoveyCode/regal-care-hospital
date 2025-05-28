@@ -103,6 +103,7 @@ export const InfiniteMovingCards = ({
                     height={15}
                     priority={true}
                   />
+              
                 </div>
                 <span className="flex flex-col gap-1">
                   <span className="text-xl font-bold leading-[1.6] text-white">
