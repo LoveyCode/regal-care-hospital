@@ -8,7 +8,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { FieldValues, ControllerRenderProps, Control } from "react-hook-form";
+import {  Control } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { FormFieldType } from './forms/PatientForm';
 import Image from 'next/image';

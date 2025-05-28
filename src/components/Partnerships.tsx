@@ -21,6 +21,7 @@ const Partnerships = () => {
   src={hospital.img}
   alt={hospital.name}
   width={112} // 28 * 4 (Tailwind's w-28 = 112px)
+  height={112}
   className="w-28 h-auto"
 />
             
