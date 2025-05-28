@@ -1,3 +1,4 @@
+
 import AppointmentForm from "@/components/forms/AppointmentForm";
 import { getPatient } from "@/lib/actions/patient.actions";
 import Image from "next/image";
@@ -5,6 +6,11 @@ import Image from "next/image";
 
 export default async function NewAppointment({ params: {userId}}: SearchParamProps){
     const patient = await getPatient(userId);
+
+      if (!patient) {
+    return <div className="text-center mt-20 text-red-500">Patient not found</div>;
+  }
+
  
     return (
       <div className="flex h-screen max-h-screen bg-zinc-100 dark:bg-zinc-900 text-zinc-500 dark:text-zinc-200">

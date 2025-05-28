@@ -35,7 +35,7 @@ export const AppointmentForm = ({
   const AppointmentFormValidation = getAppointmentSchema(type);
  const [isOnPage, setIsOnPage] =useState (false)
        
-  
+   
   
           const pathname = usePathname();
         useEffect(() => {
