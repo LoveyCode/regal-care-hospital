@@ -1,7 +1,7 @@
 "use client";
 import React from 'react'
 import { motion } from "motion/react";
-import { ImagesSlider } from './ui/ImageSlider3';
+import { ImagesSlider } from './ui/ImagesSlider';
 import { heroImages } from '../../data';
 
 export default function Hero() {
