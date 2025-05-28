@@ -3,7 +3,7 @@ import {ID, Query } from "node-appwrite"
 import jwt from 'jsonwebtoken';
 import { cookies } from 'next/headers';
 
-import  { APPOINTMENT_COLLECTION_ID, BUCKET_ID,
+import  { BUCKET_ID,
 DATABASE_ID,
 ENDPOINT,
 PATIENT_COLLECTION_ID,
@@ -15,7 +15,7 @@ users,
 
 import { InputFile } from "node-appwrite/file"
 import { parseStringify } from "../utils";
-import { revalidatePath } from "next/cache";
+
 
 const JWT_SECRET = process.env.JWT_SECRET as string 
 
@@ -163,7 +163,7 @@ const newPatient =await databases.createDocument(
 )
 return parseStringify(newPatient);
 } catch (error) {
-  
+    console.error("Error Creating New Patient:", error);
 }
   }
 

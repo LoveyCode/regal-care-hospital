@@ -40,7 +40,7 @@ const TrustUs = () => {
                 </div>
                 <h1 className='Home-sub-heading pb-2'>Result Oriented</h1>
           <p className='paragraph-text'>
-            We offer a full spectrum of medical services—from general medicine and specialist
+            We offer a full spectrum of medical services from general medicine and specialist
             consultations to advanced diagnostics, surgical procedures, and emergency care. 
             </p>
             </div>
@@ -75,7 +75,7 @@ const TrustUs = () => {
                 </div>
                 <h1 className='Home-sub-heading pb-2'>You Speck, We Listen</h1>
           <p className='paragraph-text'>
-            At Regal Care, we believe that healing goes beyond medicine. That’s why we’ve created a
+            At Regal Care, we believe that healing goes beyond medicine. That&apos;s why we&apos;ve created a
             supportive and respectful environment where patients feel heard, valued, and safe. 
           </p>
           </div>

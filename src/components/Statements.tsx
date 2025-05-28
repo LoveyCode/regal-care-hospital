@@ -43,9 +43,10 @@ const Statements = () => {
    <React.Fragment  key={icon.id}>
    <div className='flex md:max-w-60 max-w-32 gap-2 '>
    <a href={icon.link} target="_blank" rel="noopener noreferrer">
-  <img
+  <Image
     src={icon.src}
     alt={icon.alt}
+    width={40}
     className="w-10 h-auto"
   />
 </a>      

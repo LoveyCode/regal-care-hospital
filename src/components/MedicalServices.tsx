@@ -13,16 +13,14 @@ const MedicalServices = () => {
     </div>
 
 <div className="flex flex-wrap rounded-full justify-center items-center gap-5 ">
-  
   {servicesImages.map((service, index) => (
-      <div className='flex flex-col'>
-            <motion.div
-              key={index}
-              className="relative overflow-hidden rounded-full aspect-square w-[300px] sm:w-[300px] md:w-[400px]"
-              initial="rest"
-              whileHover="hover"
-              animate="rest"
-            >
+  <div key={index} className='flex flex-col'>
+    <motion.div
+      className="relative overflow-hidden rounded-full aspect-square w-[300px] sm:w-[300px] md:w-[400px]"
+      initial="rest"
+      whileHover="hover"
+      animate="rest"
+    >
               <Image
                 src={service.src}
                 alt={service.serviceName}

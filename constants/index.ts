@@ -1,8 +1,9 @@
+import { PatientFormValues } from "@/lib/validation";
+
 export const GenderOptions = ["male", "female", "other"];
 
-export const PatientFormDefaultValues = {
-  firstName: "",
-  lastName: "",
+export const PatientFormDefaultValues: PatientFormValues = {
+  name: "",
   email: "",
   phone: "",
   birthDate: new Date(Date.now()),

@@ -1,10 +1,7 @@
 "use client";
 import React from 'react'
-import Image from "next/image";
-import { AuroraBackground } from './ui/aurora-Background';
-import { TextGenerateEffect } from './ui/text-generate-effect';
 import { motion } from "motion/react";
-import { ImagesSlider } from './ui/ImageSlider';
+import { ImagesSlider } from './ui/ImageSlider3';
 import { heroImages } from '../../data';
 
 export default function Hero() {

@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 
+
 export const UserFormValidation = z.object({
   name: z
     .string()
@@ -104,6 +105,8 @@ birthDate: z.coerce.date().refine((date) => {
     }),
 });
 
+export type PatientFormValues = z.infer<typeof PatientFormValidation>;
+
 export const CreateAppointmentSchema = z.object({
   primaryPhysician: z.string().min(2, "Select at least one doctor"),
 schedule: z.coerce.date().refine((date) => {
@@ -128,6 +131,8 @@ schedule: z.coerce.date().refine((date) => {
   
   cancellationReason: z.string().optional(),
 });
+
+
 
 export const ScheduleAppointmentSchema = z.object({
   primaryPhysician: z.string().min(2, "Select at least one doctor"),

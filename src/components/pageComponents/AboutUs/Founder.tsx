@@ -23,7 +23,7 @@ const Founder = () => {
               <div className="hidden md:flex flex-col justify-center items-center absolute inset-0 bg-black/60 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full text-center px-4">
                 <h3 className="text-xl font-semibold">Dr. Jagogo Okonkwo</h3>
                 <p className="text-lg mt-1">Founder & Visionary Leader</p>
-                <p className="text-sm mt-2">Passionate about compassionate care and technology-driven health solutions.</p>
+                <p className="text-sm mt-2">Passionate about compassionate care and technology driven health solutions.</p>
               </div>
             </div>
       
@@ -31,7 +31,7 @@ const Founder = () => {
             <div className="mt-4 md:hidden">
               <h3 className="text-lg font-semibold">Dr. Jane Doe</h3>
               <p className="text-sm">Founder & Visionary Leader</p>
-              <p className="text-xs mt-2">Passionate about compassionate care and technology-driven health solutions.</p>
+              <p className="text-xs mt-2">Passionate about compassionate care and technology driven health solutions.</p>
             </div>
           </section>,
     </div>

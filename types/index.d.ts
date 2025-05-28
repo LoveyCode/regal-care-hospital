@@ -45,7 +45,9 @@ declare type SearchParamProps = {
     identificationDocument?: FormData | undefined;
     privacyConsent: boolean;
   }
+
   
+
   declare type CreateAppointmentParams = {
     userId: string;
     patient: string;

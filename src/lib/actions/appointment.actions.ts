@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use server"
 
 import { ID, Query } from "node-appwrite";
-import { APPOINTMENT_COLLECTION_ID, BUCKET_ID, DATABASE_ID, databases, ENDPOINT, messaging, PROJECT_ID } from "../appwrite.config";
+import { APPOINTMENT_COLLECTION_ID, DATABASE_ID, databases, messaging } from "../appwrite.config";
 import { formatDateTime, parseStringify } from "../utils";
 import { Appointment } from "../../../types/appwrite.type";
-import { revalidatePath } from "next/cache";
+
 
 
 export const isDoctorAvailable = async (doctorName: string, schedule: Date) => {
@@ -126,6 +127,8 @@ export const updateAppointment = async ({
     }
   };
 
+
+
   export const sendSMSNotification = async (userId: string, content:string) =>{
     try {
       const message = await messaging.createSms(
@@ -136,7 +139,7 @@ export const updateAppointment = async ({
       )
       return parseStringify (message)
     } catch (error) {
-      
+        console.error("Error sending SMS Notification:", error);
     }
   }
   

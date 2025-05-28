@@ -52,7 +52,7 @@ const WelcomeMessage = () => {
           </p>
 
           <p className='paragraph-text'>
-            At Regal Care, we believe that healing goes beyond medicine. That’s why we’ve created a
+            At Regal Care, we believe that healing goes beyond medicine. That&apos;s why we&apos;ve created a
             supportive and respectful environment where patients feel heard, valued, and safe. We
             continue to grow—not just in size, but in our ability to respond to the changing health
             needs of our community.

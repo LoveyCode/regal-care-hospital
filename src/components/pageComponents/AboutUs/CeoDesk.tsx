@@ -1,7 +1,5 @@
 "use client";
 import React from "react";
-import { cn } from "@/lib/utils";
-import { Boxes } from "@/components/ui/background-boxes";
 import Image from "next/image";
 
 const CeoDesk = () => {
@@ -34,29 +32,29 @@ const CeoDesk = () => {
         
                 <p className="pages-p">
                   At Regal Care, we recognize that each patient is unique. 
-                  That’s why we have built an environment where care is tailored, dignified,
-                   and respectful  no matter who you are or where you’re from. From routine 
+                  That&apos;s why we have built an environment where care is tailored, dignified,
+                   and respectful  no matter who you are or where you&apos;re from. From routine 
                    checkups to complex surgeries, our team works diligently to ensure every
                     experience is positive, safe, and supportive.</p>
         
                    <p className="pages-p">Our hospital is structured around key departments designed to meet the healthcare 
                    needs of individuals and families alike: </p>
         
-                    <p className="pages-p">General Outpatient Consultation – for accessible, 
+                    <p className="pages-p">General Outpatient Consultation: for accessible, 
                     everyday medical care and long-term wellness.</p>
         
-        <li className="pages-p">Surgical Services – equipped with modern surgical suites for general and 
+        <li className="pages-p">Surgical Services: equipped with modern surgical suites for general and 
                      specialized procedures.</li>
         
-        <li className="pages-p">Maternity & Childbirth Services – supporting mothers through every stage of pregnancy and 
+        <li className="pages-p">Maternity & Childbirth Services: supporting mothers through every stage of pregnancy and 
         delivery with safety and care.</li>
         
-        <li className="pages-p">Orthopedic & Trauma Surgery Services – treating bone, joint, and injury-related 
+        <li className="pages-p">Orthopedic & Trauma Surgery Services: treating bone, joint, and injury-related 
         conditions with precision and expertise.</li>
         
-        <li className="pages-p">Diagnostic Imaging Services – offering accurate diagnosis with cutting-edge imaging technology.</li>
+        <li className="pages-p">Diagnostic Imaging Services: offering accurate diagnosis with cutting-edge imaging technology.</li>
         
-        <li className="pages-p">Pharmacy – providing timely access to essential medications and pharmaceutical guidance.</li>
+        <li className="pages-p">Pharmacy: providing timely access to essential medications and pharmaceutical guidance.</li>
         
         <p className="pages-p">Our multidisciplinary team comprises skilled physicians, nurses, radiologists, pharmacists, 
         and administrative professionals all united by a shared passion for helping people heal 
@@ -70,7 +68,7 @@ const CeoDesk = () => {
          <p className="pages-p">As you explore our website, we hope you find it informative and helpful. Whether you are a
          new visitor or a returning patient, we are honored to be part of your healthcare journey.</p>
         
-        <p className="pages-p">Thank you for choosing Regal Care Hospital — where excellence meets empathy, and healing 
+        <p className="pages-p">Thank you for choosing Regal Care Hospital where excellence meets empathy, and healing 
         begins with heart.</p>
         
         <p className="pages-p">Warm regards <br />  </p>

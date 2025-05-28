@@ -42,6 +42,7 @@ const Success  =  async ({ params: { userId }, searchParams,}: SearchParamProps)
 
         <section className="request-details">
           <p>Requested appointment details: </p>
+          {doctor && (
           <div className="flex items-center gap-3">
             <Image
               src={doctor?.image!}
@@ -52,6 +53,7 @@ const Success  =  async ({ params: { userId }, searchParams,}: SearchParamProps)
             />
             <p className="whitespace-nowrap">Dr. {doctor?.name}</p>
           </div>
+          )}
           <div className="flex gap-2">
             <Image
               src="/assets/icons/calendar.svg"
@@ -70,7 +72,7 @@ const Success  =  async ({ params: { userId }, searchParams,}: SearchParamProps)
           </Link>
         </Button>
 
-        <p className="copyright">© 2024 MedIntel</p>
+        <p className="copyright">© 2024 Regal Care Hospital</p>
 
     </div>
     </div>

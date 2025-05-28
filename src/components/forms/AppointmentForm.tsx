@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import { Button } from "@/components/ui/button"
 import {Form,} from "@/components/ui/form"
 import CustomFormField from "../CustomFormField"
 import SubmitButton from "../SubmitButton"
@@ -106,7 +105,8 @@ if (type === 'create' && patientId) {
         router.push(`/patients/${userId}/new-appointment/success?appointmentId=${appointment.$id}`)
     }
 
-}else {
+}else 
+  if (appointment?.$id) {
   const appointmentToUpdate = {
     userId,
     appointmentId: appointment?.$id!,
@@ -119,12 +119,10 @@ if (type === 'create' && patientId) {
     type
   }
   
-  const updatedAppointment = await updateAppointment(appointmentToUpdate);
-  if (updatedAppointment){
+ await updateAppointment(appointmentToUpdate);
     //setOpen only if setOpen exist
-    setOpen && setOpen (false);
+   if (setOpen) setOpen(false);
     form.reset();
-  }
 }
 
     } catch (error) {
@@ -248,4 +246,4 @@ placeholder="Enter reason for appointment"
   )
 }
 
-export default AppointmentForm
+export default AppointmentForm;

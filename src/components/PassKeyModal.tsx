@@ -7,18 +7,15 @@ import Cookies from "js-cookie";
 import {
     AlertDialog,
     AlertDialogAction,
-    AlertDialogCancel,
     AlertDialogContent,
     AlertDialogDescription,
     AlertDialogFooter,
     AlertDialogHeader,
     AlertDialogTitle,
-    AlertDialogTrigger,
   } from "@/components/ui/alert-dialog"
   import {
     InputOTP,
     InputOTPGroup,
-    InputOTPSeparator,
     InputOTPSlot,
   } from "@/components/ui/input-otp"
 import { decryptKey, encryptKey } from '@/lib/utils';
@@ -44,7 +41,7 @@ const PassKeyModal = () => {
             } else {
               setOpen(true);
             }
-        }, [encryptedKey]);
+        }, [encryptedKey, path, router]);
 
         const closeModal = () => {
             setOpen(false);
@@ -94,6 +91,7 @@ if (passkey === process.env.NEXT_PUBLIC_ADMIN_PASSKEY) {
             value={passkey}
             onChange={(value) => setPasskey(value)}
           >
+
             <InputOTPGroup className="shad-otp">
               <InputOTPSlot className="shad-otp-slot" index={0} />
               <InputOTPSlot className="shad-otp-slot" index={1} />

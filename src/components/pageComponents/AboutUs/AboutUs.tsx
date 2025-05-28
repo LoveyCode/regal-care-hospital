@@ -11,7 +11,7 @@ const AboutUs = () => {
               <h1 className=' pages-header p-5 pt-10'>Our Vision</h1>
                 <p className="pages-p">
                  To be a trusted leader in healthcare, recognized for our excellence 
-                 in patient care, innovation, and community wellness—where every life 
+                 in patient care, innovation, and community wellness where every life 
                  is valued and every patient experience is regal. We strive to set the 
                  highest standards in medical service delivery, combining cutting-edge 
                  technology with compassionate care to ensure optimal outcomes for every 
@@ -46,7 +46,7 @@ const AboutUs = () => {
                       continuous improvement. Our goal is to ensure that every individual, regardless
                        of background or condition, receives personalized attention and holistic care 
                        in a safe and supportive environment. We believe that healthcare should not 
-                       only treat illness but also uplift the human spirit—through empathy, respect, 
+                       only treat illness but also uplift the human spirit through empathy, respect, 
                        and unwavering dedication. By staying at the forefront of medical advancements 
                        and investing in ongoing training, we aim to empower both our patients and our 
                        staff, fostering trust, healing, and long-term health for the communities we 
@@ -68,11 +68,11 @@ const AboutUs = () => {
 
                 <h3 className="font-bold pages-p"> A Modern Hospital with a Human Touch </h3>
                  <p className="pages-p">Regal Care Hospital was founded with a clear vision: to bring accessible, 
-                 world-class healthcare to every family — one that integrates advanced medical 
+                 world-class healthcare to every family one that integrates advanced medical 
                  technologies with heartfelt patient care. Our facility is equipped to handle a 
-                 wide range of services — from general outpatient consultations to surgical 
+                 wide range of services from general outpatient consultations to surgical 
                  interventions, maternity and childbirth support, trauma surgery, diagnostic 
-                 imaging, and pharmacy services — all delivered under one roof with precision 
+                 imaging, and pharmacy services all delivered under one roof with precision 
                  and empathy. </p>
 
                  <p className="pages-p">What sets us apart is our unwavering focus on comfort, transparency, 
@@ -86,14 +86,14 @@ const AboutUs = () => {
                   best practices. Our diagnostic tools offer clarity and speed, while our medical 
                   teams undergo continuous training to remain at the forefront of their fields.</p>
 
-                  <p className="pages-p">Yet, our strength lies not only in our equipment or expertise — but in our people.
+                  <p className="pages-p">Yet, our strength lies not only in our equipment or expertise but in our people.
                    Every doctor, nurse, and staff member is carefully selected for their professional 
                    competence and human warmth. We believe healing begins with trust, and we work 
                    hard to earn it daily.</p>
 
                    <h3 className="font-bold pages-p">A Safe Haven for Families </h3> 
-                  <p className="pages-p">We understand how overwhelming a health concern can be — which is why we approach 
-                  every case with the urgency, calmness, and support it deserves. Whether it’s a 
+                  <p className="pages-p">We understand how overwhelming a health concern can be which is why we approach 
+                  every case with the urgency, calmness, and support it deserves. Whether it&apos;s a 
                   child with a fever, a mother preparing to give birth, or an elderly patient in 
                   need of surgical care, Regal Care is where you will find capable hands and caring 
                   hearts.</p>
@@ -118,7 +118,7 @@ const AboutUs = () => {
 
                     <p className="pages-p">Whether you're visiting for a routine check-up or a critical procedure, 
                     Regal Care Hospital stands ready to serve with professionalism, dignity, 
-                    and compassion — because your care is our calling.</p>
+                    and compassion because your care is our calling.</p>
                 
               </div>
             </section>,

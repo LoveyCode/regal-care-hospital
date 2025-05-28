@@ -1,15 +1,13 @@
 "use client"
- import {useEffect, useState} from "react"
+ import {useCallback, useEffect, useState} from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-
-import { Button } from "@/components/ui/button"
 import CustomFormField from "../CustomFormField"
 import SubmitButton from "../SubmitButton"
-import { PatientFormValidation } from "@/lib/validation"
+import { PatientFormValidation,  PatientFormValues } from "@/lib/validation"
 import { usePathname, useRouter } from "next/navigation"
-import { createUser, registerPatient } from "@/lib/actions/patient.actions"
+import { registerPatient } from "@/lib/actions/patient.actions"
 import { FormFieldType } from "./PatientForm"
 import { Form, FormControl } from "@/components/ui/form";
 import { Label } from "@/components/ui/label";
@@ -24,10 +22,8 @@ const RegisterForm = ({user}:{user: User}) => {
    const router = useRouter()
     const [isLoading, setIsLoading] = useState(false);
     const [isOnPage, setIsOnPage] =useState (false)
+      const [files, setFiles] = useState<File[] | undefined>(undefined);
 
-          
-    
-    
             const pathname = usePathname();
           useEffect(() => {
       if (pathname === '/new-appointment') {
@@ -37,15 +33,12 @@ const RegisterForm = ({user}:{user: User}) => {
       }
     }, [pathname]);
 
-  const form = useForm<z.infer<typeof PatientFormValidation>>({
+  const form = useForm<PatientFormValues>({
     resolver: zodResolver(PatientFormValidation),
-    defaultValues: {
-      ...PatientFormDefaultValues, 
-      name: "",
-      email: "",
-      phone: "",
-    },
+  defaultValues: PatientFormDefaultValues,
   });
+   
+
  
   // 2. Define a submit handler.
  const onSubmit= async (values: z.infer<typeof PatientFormValidation>)=> {
@@ -82,6 +75,13 @@ formData.append('fileName', values.identificationDocument[0].name)
   setIsLoading(false);
 }
   }
+
+
+
+  const handleFileChange = useCallback((newFiles: File[]) => {
+    setFiles(newFiles);
+  }, []);
+
 
   return (
     <Form {...form}>
@@ -329,8 +329,8 @@ Asthma, Previous Stroke (2020), History of Tuberculosis (Treated in 2018)"
               label="Scanned copy of identification document"
               renderSkeleton={(field) => (
                 <FormControl>
-              <FileUploader  files={field.value}
-               onChange={field.onChange}/>
+              <FileUploader  files={files}
+               onChange={handleFileChange}/>
                 </FormControl>
               )}
             />

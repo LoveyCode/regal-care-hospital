@@ -1,6 +1,7 @@
 import React from 'react'
 import { hospitals } from '../../data'
 import SectionHeading from './sectionHeading';
+import Image from 'next/image';
 
 
 const Partnerships = () => {
@@ -16,11 +17,12 @@ const Partnerships = () => {
         {hospitals.map((hospital) =>(
    <React.Fragment  key={hospital.id}>
    <div className='flex bg-white w-[10rem] h-auto p-5 rounded-lg md:max-w-60 max-w-32 gap-2'>
-   <img
-                  src={hospital.img}
-                  alt={hospital.name}
-                  className='w-28 h-auto'
-                />
+  <Image
+  src={hospital.img}
+  alt={hospital.name}
+  width={112} // 28 * 4 (Tailwind's w-28 = 112px)
+  className="w-28 h-auto"
+/>
             
    </div>
 </React.Fragment>

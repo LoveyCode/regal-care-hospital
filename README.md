@@ -33,3 +33,5 @@ Regal Care Hospital is a modern, responsive, and user-friendly healthcare appoin
 1. Clone the repository:
    ```bash
    git clone https://github.com/LoveyCode/Regal-Care-Hospital.git
+
+
