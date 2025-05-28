@@ -1,19 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use server"
 
-import { ID, Query } from "node-appwrite";
+import { ID, Models, Query } from "node-appwrite";
 import { APPOINTMENT_COLLECTION_ID, DATABASE_ID, databases, messaging } from "../appwrite.config";
 import { formatDateTime, parseStringify } from "../utils";
-import { Appointment } from "../../../types/appwrite.type";
-
-
-
-export type AppointmentStats = {
-  scheduledCount: number;
-  pendingCount: number;
-  cancelledCount: number;
-  documents: any[];
-};
+import { Appointment, AppointmentStats } from "../../../types/appwrite.type";
 
 
 export const isDoctorAvailable = async (doctorName: string, schedule: Date) => {
@@ -73,13 +64,33 @@ export const getRecentAppointmentList = async (): Promise<AppointmentStats | und
         [Query.orderDesc("$createdAt")]
       );
 
+
+       const mappedAppointments: Appointment[] = appointments.documents.map((doc: Models.Document) => ({
+      $id: doc.$id,
+      $createdAt: doc.$createdAt,
+      $updatedAt: doc.$updatedAt,
+      $collectionId: doc.$collectionId,
+      $databaseId: doc.$databaseId,
+      $permissions: doc.$permissions,
+
+      // custom fields
+      patient: doc.patient,
+      schedule: new Date(doc.schedule), // convert string to Date
+      status: doc.status,
+      primaryPhysician: doc.primaryPhysician,
+      reason: doc.reason,
+      note: doc.note,
+      userId: doc.userId,
+      cancellationReason: doc.cancellationReason,
+    }));
+
       const initialCounts = {
         scheduledCount: 0,
         pendingCount: 0,
         cancelledCount: 0,
       };
 
-      const counts = (appointments.documents as Appointment[]).reduce((acc, appointment)=>{
+      const counts = ( mappedAppointments).reduce((acc, appointment)=>{
 if(appointment.status === 'scheduled') {
     acc.scheduledCount += 1;
 } else if (appointment.status === 'pending') {
@@ -91,11 +102,11 @@ if(appointment.status === 'scheduled') {
 return acc;
 }, initialCounts);
 
-const data = {
-    totalCount: appointments.total,
-    ...counts,
-    documents: appointments.documents
-}
+   const data: AppointmentStats = {
+      ...counts,
+      totalCount: appointments.total,
+      documents: mappedAppointments,
+    };
 
 return parseStringify(data);
     } catch (error) {

@@ -5,13 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { columns } from '@/components/table/columns';
-
-type AppointmentStats = {
-  scheduledCount: number;
-  pendingCount: number;
-  cancelledCount: number;
-  documents: any[];
-};
+import { AppointmentStats } from '../../../types/appwrite.type';
 
 const Admin = async () => {
   const appointments: AppointmentStats = await getRecentAppointmentList() ?? {
