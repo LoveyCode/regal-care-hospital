@@ -80,7 +80,7 @@ export const createUser = async (user: CreateUserParams) => {
       token,
       user: parseStringify(newUser),
     };
-  } catch (error: any) {
+  } catch (error) {
     console.error("An error occurred while creating a new user:", error);
     throw error;
   }

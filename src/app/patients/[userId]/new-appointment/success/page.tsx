@@ -10,6 +10,14 @@ const Success  =  async ({ params: { userId }, searchParams,}: SearchParamProps)
     
     const appointmentId = (searchParams?.appointmentId as string) || "";
     const appointment = await getAppointment(appointmentId);
+
+      if (!appointment) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <p className="text-center text-red-500">Appointment not found.</p>
+      </div>
+    );
+  }
   
     const doctor = Doctors.find(
         (doctor) => doctor.name === appointment.primaryPhysician
@@ -45,7 +53,7 @@ const Success  =  async ({ params: { userId }, searchParams,}: SearchParamProps)
           {doctor && (
           <div className="flex items-center gap-3">
             <Image
-              src={doctor?.image!}
+              src={doctor?.image}
               alt="doctor"
               width={100}
               height={100}

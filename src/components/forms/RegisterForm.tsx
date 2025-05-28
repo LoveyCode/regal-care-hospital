@@ -327,7 +327,7 @@ Asthma, Previous Stroke (2020), History of Tuberculosis (Treated in 2018)"
               control={form.control}
               name="identificationDocument"
               label="Scanned copy of identification document"
-              renderSkeleton={(field) => (
+              renderSkeleton={() => (
                 <FormControl>
               <FileUploader  files={files}
                onChange={handleFileChange}/>
@@ -335,6 +335,7 @@ Asthma, Previous Stroke (2020), History of Tuberculosis (Treated in 2018)"
               )}
             />
      </section>
+
 
 
      <section className="space-y-6">

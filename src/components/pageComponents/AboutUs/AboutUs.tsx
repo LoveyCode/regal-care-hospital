@@ -116,7 +116,7 @@ const AboutUs = () => {
                     not just to treat illness, but to enhance life — for individuals, families, 
                     and communities.</p>
 
-                    <p className="pages-p">Whether you're visiting for a routine check-up or a critical procedure, 
+                    <p className="pages-p">Whether you&apos;re visiting for a routine check-up or a critical procedure, 
                     Regal Care Hospital stands ready to serve with professionalism, dignity, 
                     and compassion because your care is our calling.</p>
                 
