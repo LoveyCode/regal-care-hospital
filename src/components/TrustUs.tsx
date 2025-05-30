@@ -10,13 +10,13 @@ const TrustUs = () => {
            <SectionHeading title= {<h1 className='header text-center'> Where Trust <span className='text-blue-300'> Meets Care</span></h1>} />
             <div className="flex gap-5 ">
             <div className='w-full flex flex-col'>
-                <div className='rounded-full justify-center items-center bg-blue-300 flex w-[70px] mb-10'>
+                <div className='rounded-full justify-center items-center bg-blue-300 flex w-[40px] h-[40px]  lg:w-[50px] lg:h-[50px] mb-10'>
                     <Image 
                     src= "/assets/icons/easy-access.png" 
                     alt='Easy Access To Care'
                     height={70}
                     width={70}
-                    className='invert brightness-0'
+                    className='invert brightness-0 h-[40px] w-[40px] lg:w-[50px] lg:h-[50px]'
                     />
                 </div>
                 <h1 className='Home-sub-heading pb-2'>Easy Access To Care</h1>
@@ -29,13 +29,13 @@ const TrustUs = () => {
           </div>
 
           <div className='w-full flex flex-col'>
-          <div className='rounded-full justify-center items-center bg-blue-300 flex w-[70px] h-[70px] mb-10'>
+          <div className='rounded-full justify-center items-center bg-blue-300 flex w-[40px] h-[40px]  lg:w-[50px] lg:h-[50px] mb-10'>
                     <Image 
                     src= "/assets/icons/results-oriented.png" 
                     alt='Result Oriented'
                     height={45}
                     width={45}
-                    className='invert brightness-0'
+                    className='invert brightness-0 h-[25px] w-[25px]  lg:w-[50px] lg:h-[50px]'
                     />
                 </div>
                 <h1 className='Home-sub-heading pb-2'>Result Oriented</h1>
@@ -47,13 +47,13 @@ const TrustUs = () => {
           </div>
             <div className="flex gap-5 pt-10">
             <div className='w-full flex flex-col'>
-            <div className='rounded-full justify-center items-center bg-blue-300 flex w-[70px] h-[70px] mb-10'>
+            <div className='rounded-full justify-center items-center bg-blue-300 flex w-[40px] h-[40px]  lg:w-[50px] lg:h-[50px] mb-10'>
                     <Image 
                     src= "/assets/icons/medical-expertise.png" 
                     alt='Medical Expertise'
                     height={45}
                     width={45}
-                    className='invert brightness-0'
+                    className='invert brightness-0 h-[40px] w-[40px]  lg:w-[50px] lg:h-[50px]'
                     />
                 </div>
                 <h1 className='Home-sub-heading pb-2'>Unrivaled Clinical Expertise</h1>
@@ -64,13 +64,13 @@ const TrustUs = () => {
           </div>
 
           <div className='w-full flex flex-col'>
-          <div className='rounded-full justify-center items-center bg-blue-300 flex w-[70px] h-[70px] mb-10'>
+          <div className='rounded-full justify-center items-center bg-blue-300 flex w-[40px] h-[40px]  lg:w-[50px] lg:h-[50px] mb-10'>
                     <Image 
                     src= "/assets/icons/we-listen.png" 
                     alt='Medical Expertise'
-                    height={45}
-                    width={45}
-                    className='invert brightness-0'
+                    height={70}
+                    width={70}
+                    className='invert brightness-0 w-[30px] h-[30px]  lg:w-[50px] lg:h-[50px]' 
                     />
                 </div>
                 <h1 className='Home-sub-heading pb-2'>You Speck, We Listen</h1>

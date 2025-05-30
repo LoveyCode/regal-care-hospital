@@ -29,8 +29,8 @@ const Home = () => {
 
       <FadeInWhenVisible delay={0.2}>
       <Afterhero 
-       title={<h1 className="text-zinc-600 text-xl font-bold sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl">Have any questions? Call us now! 07099991234, 09044723458</h1>}
-         icon={<FaLocationDot className='text-zinc-600 w-[3rem] h-[3rem]' />}
+       title={<h1 className="text-zinc-600 text-2xl font-bold md:text-3xl lg:text-4xl xl:text-5xl">Have any questions? Call us now! 07099991234, 09044723458</h1>}
+         icon={<FaLocationDot className='text-zinc-600 w-[2.5rem] h-[2.5rem] md:w-[3rem] md:h-[3rem]' />}
        
         />
         </FadeInWhenVisible>

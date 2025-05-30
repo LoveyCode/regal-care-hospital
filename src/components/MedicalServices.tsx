@@ -12,9 +12,10 @@ const MedicalServices = () => {
    <SectionHeading title= {<h1 className='header text-center'> Specialized Medical Services  <span className='text-blue-300'> We Offer </span></h1>} />
     </div>
 
-<div className="flex flex-wrap rounded-full justify-center items-center gap-5 ">
+<div className="flex flex-wrap justify-center gap-x-5 gap-y-12 px-4 sm:px-6">
+
   {servicesImages.map((service, index) => (
-  <div key={index} className='flex flex-col'>
+  <div key={index} className='flex flex-col items-center text-center'>
     <motion.div
       className="relative overflow-hidden rounded-full aspect-square w-[300px] sm:w-[300px] md:w-[400px]"
       initial="rest"
@@ -50,6 +51,7 @@ const MedicalServices = () => {
           ))}
 
 </div>
+
 </section>
   )
 }

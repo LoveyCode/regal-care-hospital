@@ -33,10 +33,10 @@
 
 
   .navitem{
-    @apply block px-2 py-2 whitespace-nowrap text-dark-300 dark:text-zinc-200 text-lg rounded hover:text-blue-300 transition
+    @apply block px-2 py-2 whitespace-nowrap text-dark-300 dark:text-zinc-200 text-[1rem] xl:text-lg  rounded hover:text-blue-300 transition
   }
   .inner-nav-item{
-    @apply py-4 text-lg cursor-pointer hover:text-blue-300
+    @apply py-4 text-[1rem] xl:text-lg cursor-pointer hover:text-blue-300
   }
 
   .ul-list{
@@ -45,6 +45,10 @@
 
   .btn{
     @apply block px-2 py-1 text-lg whitespace-nowrap font-medium text-zinc-200 rounded-sm bg-yellow-600 hover:bg-blue-300 transition
+  }
+
+    .btn-sm{
+    @apply block px-2 py-1 text-sm whitespace-nowrap font-medium text-zinc-200 rounded-sm bg-yellow-600 hover:bg-blue-300 transition
   }
 
   .statementCard{
@@ -71,7 +75,7 @@
   }
 
   .header {
-    @apply font-condensed text-5xl lg:text-4xl xl:text-5xl text-center font-bold md:text-5xl;
+    @apply font-condensed text-3xl lg:text-4xl xl:text-5xl text-center font-bold;
   }
 
     .pages-header {
@@ -85,7 +89,7 @@
   /* @apply text-36-bold md:text-36-bold; */
 
   .Home-sub-heading {
-    @apply font-condensed md:text-2xl text-3xl font-bold;
+    @apply font-condensed md:text-2xl text-xl font-bold;
   }
 
   .statement-text{
@@ -94,7 +98,7 @@
 
 @layer components {
   .paragraph-text {
-    @apply font-roboto text-justify text-dark-300 dark:text-zinc-200  text-xl space-y-6 prose prose-xl font-normal ;
+    @apply font-roboto text-justify text-dark-300 dark:text-zinc-200  text-xl  font-normal ;
   }
 }
 

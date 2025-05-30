@@ -10,7 +10,7 @@ type Props = {
   delay?: number;
 };
 
-const FadeInWhenVisible: React.FC<Props> = ({ children, className = "", delay = 0 }) => {
+const FadeInWhenVisible: React.FC<Props> = ({ children, className = "", delay = 0.5 }) => {
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.2,

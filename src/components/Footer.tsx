@@ -11,7 +11,7 @@ const Footer = () => {
           alt="Regal Care Logo"
           height={1000}
           width={1000}
-          className="h-28"
+          className=" h-16 lg:h-28 w-auto"
         />
       </div>
 

@@ -4,10 +4,10 @@ import SectionHeading from './sectionHeading';
 
 const WelcomeMessage = () => {
   return (
-    <section className=" flex px-6 mt-40">
-      <div className="flex flex-col xl:flex-row justify-center gap-14 w-full">
+    <section className=" flex px-6 mt-40 ">
+      <div className="flex items-center flex-col xl:flex-row justify-center gap-14 w-full">
         {/* Image */}
-        <div className="w-full xl:w-1/2 flex flex-col gap-10">
+        <div className=" w-full xl:w-1/2 flex flex-col gap-10">
           <Image
             src= "/assets/images/Prenatal-care.jpg"
             alt="Orthopedics Trauma"
@@ -29,7 +29,7 @@ const WelcomeMessage = () => {
         <div className="flex flex-col gap-6 w-full xl:w-1/2 text-lg">
           <SectionHeading title= {<h1 className='header text-center'> Welcome to  <span className='text-blue-300'> Regal Care</span></h1>} />
           
-          <p className='paragraph-text'>
+          <p className='paragraph-text whitespace-break-spaces'>
             Regal Care Hospital is a purpose-built, 60-bed facility dedicated to delivering
             high-quality, patient-centered healthcare. Since opening our doors in 2005, we have
             earned a solid reputation for professionalism, compassion, and innovation in clinical

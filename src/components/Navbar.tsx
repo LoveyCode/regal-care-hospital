@@ -46,19 +46,19 @@ const isOnPatientsPage = pathname === '/patients';
   return (
 <section className="w-full py-10 sticky top-0 z-50 backdrop-blur-md shadow-md bg-zinc-100 dark:bg-zinc-900 text-dark-300 dark:text-zinc-200 transition-all duration-300 ease-in-out">
 
-<div className="flex justify-between items-center px-4 md:px-8">
+<div className="flex justify-start  lg:justify-between items-center px-2 xl:px-8">
 
     {/* Logo */}
     <Image
       src="/assets/icons/logo-full.svg"
       alt="Regal Care Logo"
-      width={16}
-      height={16}
-      className="h-16 lg:h-14"
+      width={200}
+      height={200}
+      className="h-10 md:h-14"
     />
 
     {/* Desktop Nav */}
-    <nav className="hidden lg:flex items-center gap-8 text-base">
+    <nav className="hidden lg:flex items-center gap-5 xl:gap-8  text-base">
       <a href="/" className="navitem">Home</a>
 
       <div className="relative group">
@@ -121,13 +121,13 @@ const isOnPatientsPage = pathname === '/patients';
     </nav>
 
     {/* Desktop Button */}
-<div className="hidden xl:flex items-center gap-4">
+<div className="hidden lg:flex items-center gap-4">
   <button onClick={onToggleTheme} className="text-sm  px-3 py-1">
    {theme === 'light' ? < MdOutlineDarkMode className="w-5 h-5" /> : < FiSun className="text-dark-300 dark:text-white w-5 h-5" />}
   </button>
 
 <motion.button
-  className="btn w-full hidden xl:block"
+  className="btn w-full hidden lg:block"
   animate={{ scale: [0.8, 1.25, 0.8] }}
   transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
    whileHover={isOnPatientsPage ? {} : { scale: 1 }}
@@ -154,6 +154,7 @@ const isOnPatientsPage = pathname === '/patients';
             alt="loader"
             width={24}
             height={24}
+            className='invert brightness-0'
           
           />
         Book Appointment
@@ -166,15 +167,61 @@ const isOnPatientsPage = pathname === '/patients';
 
     </div>
 
+
+    <div className='flex lg:hidden'>
+ <button onClick={onToggleTheme} className="text-sm px-6 py-1">
+     {theme === 'light' ? < MdOutlineDarkMode className="w-5 h-5" /> : < FiSun className="w-5 h-5" />}
+  </button>
+
+<motion.button
+  className="btn-sm w-48 hidden xl:block"
+  animate={{ scale: [0.8, 1.25, 0.8] }}
+  transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
+   whileHover={isOnPatientsPage ? {} : { scale: 1 }}
+  disabled={isOnPatientsPage}
+  onClick={() => {
+    if (!isOnPatientsPage) handleBookAppointment();
+  }}
+>
+  {isLoading && !isOnPatientsPage ? (
+        <div className="flex items-center text-sm gap-2">
+          <Image
+            src="/assets/icons/loader.svg"
+            alt="loader"
+            width={18}
+            height={18}
+            className="animate-spin"
+          />
+          Loading...
+        </div>
+      ) : (
+         <div className="flex items-center text-sm gap-2">
+          <Image
+            src="/assets/icons/appointments.svg"
+            alt="loader"
+            width={18}
+            height={18}
+            className='invert brightness-0'
+          
+          />
+        Book Appointment
+        </div>
+      )}
+
+  
+</motion.button>
+
+
     {/* Mobile Menu Toggle */}
-   <div className="lg:hidden">
+
       <button onClick={toggleMenu}>
-        {isOpen ? <X size={28} /> : <Menu size={28} />}
+        {isOpen ? <X className='mx-6' size={28} /> : <Menu className='mx-6' size={28} />}
       </button>
     </div>
   </div>
 
   {/* Mobile Nav + Button */}
+
   <AnimatePresence>
   {isOpen && (
   <motion.div 
@@ -185,7 +232,7 @@ const isOnPatientsPage = pathname === '/patients';
       transition={{ duration: 0.4, ease: "easeInOut" }}
     >
       <nav className="flex flex-col gap-4 text-lg items-start">
-        <a href="#" className="navitem">Home</a>
+       <a href="/" className="navitem">Home</a>
 
         <button onClick={() => setAboutOpen(!aboutOpen)} className="navitem">About Us</button>
         <AnimatePresence>
@@ -249,51 +296,11 @@ const isOnPatientsPage = pathname === '/patients';
         </AnimatePresence>
 
         <a href="#contact" className="navitem">Contact</a>
-        <a href="#portal" className="navitem">Book an Appointment</a>
-        <a href="#portal" className="navitem">Blog</a>
+ 
       </nav>
 
 
-  <button onClick={onToggleTheme} className="text-sm px-3 py-1">
-     {theme === 'light' ? < MdOutlineDarkMode className="w-5 h-5" /> : < FiSun className="w-5 h-5" />}
-  </button>
-
-<motion.button
-  className="btn w-full hidden xl:block"
-  animate={{ scale: [0.8, 1.25, 0.8] }}
-  transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
-   whileHover={isOnPatientsPage ? {} : { scale: 1 }}
-  disabled={isOnPatientsPage}
-  onClick={() => {
-    if (!isOnPatientsPage) handleBookAppointment();
-  }}
->
-  {isLoading && !isOnPatientsPage ? (
-        <div className="flex items-center gap-4">
-          <Image
-            src="/assets/icons/loader.svg"
-            alt="loader"
-            width={24}
-            height={24}
-            className="animate-spin"
-          />
-          Loading...
-        </div>
-      ) : (
-         <div className="flex items-center gap-4">
-          <Image
-            src="/assets/icons/appointments.svg"
-            alt="loader"
-            width={24}
-            height={24}
-          
-          />
-        Book Appointment
-        </div>
-      )}
-
-  
-</motion.button>
+ 
     </motion.div>
   )}
 </AnimatePresence>
