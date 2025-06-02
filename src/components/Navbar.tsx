@@ -46,14 +46,14 @@ const isOnPatientsPage = pathname === '/patients';
   return (
 <section className="w-full py-10 sticky top-0 z-50 backdrop-blur-md shadow-md bg-zinc-100 dark:bg-zinc-900 text-dark-300 dark:text-zinc-200 transition-all duration-300 ease-in-out">
 
-<div className="flex justify-start  lg:justify-between items-center px-2 xl:px-8">
+<div className="flex justify-between items-center px-2 xl:px-4">
 
     {/* Logo */}
     <Image
       src="/assets/icons/logo-full.svg"
       alt="Regal Care Logo"
-      width={200}
-      height={200}
+      width={400}
+      height={400}
       className="h-10 md:h-14"
     />
 
@@ -167,49 +167,11 @@ const isOnPatientsPage = pathname === '/patients';
 
     </div>
 
-
+   {/* Mobile Theme Toggle and button */}
     <div className='flex lg:hidden'>
  <button onClick={onToggleTheme} className="text-sm px-6 py-1">
      {theme === 'light' ? < MdOutlineDarkMode className="w-5 h-5" /> : < FiSun className="w-5 h-5" />}
   </button>
-
-<motion.button
-  className="btn-sm w-48 hidden xl:block"
-  animate={{ scale: [0.8, 1.25, 0.8] }}
-  transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
-   whileHover={isOnPatientsPage ? {} : { scale: 1 }}
-  disabled={isOnPatientsPage}
-  onClick={() => {
-    if (!isOnPatientsPage) handleBookAppointment();
-  }}
->
-  {isLoading && !isOnPatientsPage ? (
-        <div className="flex items-center text-sm gap-2">
-          <Image
-            src="/assets/icons/loader.svg"
-            alt="loader"
-            width={18}
-            height={18}
-            className="animate-spin"
-          />
-          Loading...
-        </div>
-      ) : (
-         <div className="flex items-center text-sm gap-2">
-          <Image
-            src="/assets/icons/appointments.svg"
-            alt="loader"
-            width={18}
-            height={18}
-            className='invert brightness-0'
-          
-          />
-        Book Appointment
-        </div>
-      )}
-
-  
-</motion.button>
 
 
     {/* Mobile Menu Toggle */}
@@ -220,8 +182,9 @@ const isOnPatientsPage = pathname === '/patients';
     </div>
   </div>
 
-  {/* Mobile Nav + Button */}
 
+
+  {/* Mobile Nav + Button */}
   <AnimatePresence>
   {isOpen && (
   <motion.div 
@@ -305,6 +268,44 @@ const isOnPatientsPage = pathname === '/patients';
   )}
 </AnimatePresence>
 
+
+<div className='pt-5'>
+<motion.button
+className="btn-sm w-48 block mx-auto lg:hidden"
+  animate={{ scale: [0.8, 1.25, 0.8] }}
+  transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
+   whileHover={isOnPatientsPage ? {} : { scale: 1 }}
+  disabled={isOnPatientsPage}
+  onClick={() => {
+    if (!isOnPatientsPage) handleBookAppointment();
+  }}
+>
+  {isLoading && !isOnPatientsPage ? (
+        <div className="flex items-center text-sm gap-2">
+          <Image
+            src="/assets/icons/loader.svg"
+            alt="loader"
+            width={18}
+            height={18}
+            className="animate-spin"
+          />
+          Loading...
+        </div>
+      ) : (
+         <div className="flex items-center text-sm gap-2">
+          <Image
+            src="/assets/icons/appointments.svg"
+            alt="loader"
+            width={18}
+            height={18}
+            className='invert brightness-0'
+          
+          />
+        Book Appointment
+        </div>
+      )}
+</motion.button>
+</div>
 </section>
 
   );
