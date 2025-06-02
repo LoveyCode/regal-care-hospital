@@ -52,8 +52,8 @@ const isOnPatientsPage = pathname === '/patients';
     <Image
       src="/assets/icons/logo-full.svg"
       alt="Regal Care Logo"
-      width={400}
-      height={400}
+      width={500}
+      height={500}
       className="h-10 md:h-14"
     />
 
@@ -268,19 +268,19 @@ const isOnPatientsPage = pathname === '/patients';
   )}
 </AnimatePresence>
 
-
-<div className='pt-5'>
-<motion.button
-className="btn-sm w-48 block mx-auto lg:hidden"
-  animate={{ scale: [0.8, 1.25, 0.8] }}
-  transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
-   whileHover={isOnPatientsPage ? {} : { scale: 1 }}
-  disabled={isOnPatientsPage}
-  onClick={() => {
-    if (!isOnPatientsPage) handleBookAppointment();
-  }}
->
-  {isLoading && !isOnPatientsPage ? (
+{!isOpen && (
+  <div className="pt-5">
+    <motion.button
+      className="btn-sm w-48 block mx-auto lg:hidden"
+      animate={{ scale: [0.8, 1.25, 0.8] }}
+      transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
+      whileHover={isOnPatientsPage ? {} : { scale: 1 }}
+      disabled={isOnPatientsPage}
+      onClick={() => {
+        if (!isOnPatientsPage) handleBookAppointment();
+      }}
+    >
+      {isLoading && !isOnPatientsPage ? (
         <div className="flex items-center text-sm gap-2">
           <Image
             src="/assets/icons/loader.svg"
@@ -292,20 +292,21 @@ className="btn-sm w-48 block mx-auto lg:hidden"
           Loading...
         </div>
       ) : (
-         <div className="flex items-center text-sm gap-2">
+        <div className="flex items-center text-sm gap-2">
           <Image
             src="/assets/icons/appointments.svg"
-            alt="loader"
+            alt="appointment icon"
             width={18}
             height={18}
-            className='invert brightness-0'
-          
+            className="invert brightness-0"
           />
-        Book Appointment
+          Book Appointment
         </div>
       )}
-</motion.button>
-</div>
+    </motion.button>
+  </div>
+)}
+
 </section>
 
   );
