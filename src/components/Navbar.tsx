@@ -52,13 +52,13 @@ const isOnPatientsPage = pathname === '/patients';
     <Image
       src="/assets/icons/logo-full.svg"
       alt="Regal Care Logo"
-      width={250}
-      height={250}
+      width={200}
+      height={200}
       className="h-10 md:h-14"
     />
 
     {/* Desktop Nav */}
-    <nav className="hidden mx-20 lg:flex items-center gap-5 xl:gap-8 text-base">
+    <nav className="hidden mx-10 lg:flex items-center gap-5 xl:gap-8 text-base">
       <a href="/" className="navitem">Home</a>
 
       <div className="relative group">
