@@ -33,7 +33,7 @@ const Admin = async () => {
 
         <main className="admin-main">
           <section className="w-full space-y-4">
-            <h1 className="header text-zinc-100">Welcome 👋</h1>
+            <h1 className="header text-zinc-100">Welcome</h1>
             <p className="text-dark-700">
               Manage new appointments today
             </p>
