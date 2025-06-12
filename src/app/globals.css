@@ -44,11 +44,11 @@
   }
 
   .btn{
-    @apply block px-2 py-1 text-lg whitespace-nowrap font-medium text-zinc-200 rounded-sm bg-yellow-600 hover:bg-blue-300 transition
+    @apply block px-4 py-4 text-lg whitespace-nowrap font-medium text-zinc-200 rounded-sm bg-yellow-600 hover:bg-blue-300 transition
   }
 
     .btn-sm{
-    @apply block px-2 py-1 text-sm whitespace-nowrap font-medium text-zinc-200 rounded-sm bg-yellow-600 hover:bg-blue-300 transition
+    @apply block px-4 py-4 text-sm whitespace-nowrap font-medium text-zinc-200 rounded-sm bg-yellow-600 hover:bg-blue-300 transition
   }
 
   .statementCard{

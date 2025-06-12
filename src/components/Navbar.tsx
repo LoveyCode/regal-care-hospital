@@ -46,19 +46,19 @@ const isOnPatientsPage = pathname === '/patients';
   return (
 <section className="w-full py-10 sticky top-0 z-50 backdrop-blur-md shadow-md bg-zinc-100 dark:bg-zinc-900 text-dark-300 dark:text-zinc-200 transition-all duration-300 ease-in-out">
 
-<div className="flex justify-between items-center px-2 xl:px-4">
+<div className="flex justify-start items-center px-2 xl:px-2">
 
     {/* Logo */}
     <Image
       src="/assets/icons/logo-full.svg"
       alt="Regal Care Logo"
-      width={500}
-      height={500}
+      width={250}
+      height={250}
       className="h-10 md:h-14"
     />
 
     {/* Desktop Nav */}
-    <nav className="hidden lg:flex items-center gap-5 xl:gap-8  text-base">
+    <nav className="hidden mx-20 lg:flex items-center gap-5 xl:gap-8 text-base">
       <a href="/" className="navitem">Home</a>
 
       <div className="relative group">
@@ -121,13 +121,13 @@ const isOnPatientsPage = pathname === '/patients';
     </nav>
 
     {/* Desktop Button */}
-<div className="hidden lg:flex items-center gap-4">
+<div className="hidden  lg:flex items-center gap-4">
   <button onClick={onToggleTheme} className="text-sm  px-3 py-1">
    {theme === 'light' ? < MdOutlineDarkMode className="w-5 h-5" /> : < FiSun className="text-dark-300 dark:text-white w-5 h-5" />}
   </button>
 
 <motion.button
-  className="btn w-full hidden lg:block"
+  className="btn mx-10 w-full hidden lg:block"
   animate={{ scale: [0.8, 1.25, 0.8] }}
   transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
    whileHover={isOnPatientsPage ? {} : { scale: 1 }}
@@ -141,8 +141,8 @@ const isOnPatientsPage = pathname === '/patients';
           <Image
             src="/assets/icons/loader.svg"
             alt="loader"
-            width={24}
-            height={24}
+            width={20}
+            height={20}
             className="animate-spin"
           />
           Loading...
@@ -152,8 +152,8 @@ const isOnPatientsPage = pathname === '/patients';
           <Image
             src="/assets/icons/appointments.svg"
             alt="loader"
-            width={24}
-            height={24}
+            width={20}
+            height={20}
             className='invert brightness-0'
           
           />
@@ -285,8 +285,8 @@ const isOnPatientsPage = pathname === '/patients';
           <Image
             src="/assets/icons/loader.svg"
             alt="loader"
-            width={18}
-            height={18}
+            width={14}
+            height={14}
             className="animate-spin"
           />
           Loading...
@@ -296,8 +296,8 @@ const isOnPatientsPage = pathname === '/patients';
           <Image
             src="/assets/icons/appointments.svg"
             alt="appointment icon"
-            width={18}
-            height={18}
+            width={14}
+            height={14}
             className="invert brightness-0"
           />
           Book Appointment
