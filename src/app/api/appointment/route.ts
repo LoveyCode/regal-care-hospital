@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import { getRecentAppointmentList } from '@/lib/actions/appointment.actions';
 import { NextResponse } from 'next/server';
 
