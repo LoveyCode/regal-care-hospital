@@ -7,15 +7,11 @@ import { columns } from '@/components/table/columns';
 import { useAppointments } from '@/components/adminAppointment';
 
 
-
-
-export function TestComponent() {
+export function ListAppointment() {
   const { data: appointments, loading } = useAppointments();
 
   if (loading) return <div>Loading...</div>;
   if (!appointments) return <div>No data found.</div>;
-
-
 
   return (
     <div className="w-full bg-dark-300">
@@ -69,4 +65,4 @@ export function TestComponent() {
   );
 };
 
-export default TestComponent;
+export default ListAppointment;

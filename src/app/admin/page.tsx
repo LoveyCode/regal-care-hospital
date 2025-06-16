@@ -1,8 +1,8 @@
 'use client'
 
-import TestComponent from "@/components/TestComponent";
+import  ListAppointment  from "@/components/ListAppointment";
 
 
 export default function Admin() {
-  return <TestComponent />;
+  return <ListAppointment />;
 }
