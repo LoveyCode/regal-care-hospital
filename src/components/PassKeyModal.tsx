@@ -50,7 +50,7 @@ const PassKeyModal = () => {
     
 const validatePasskey= (e: React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
 e.preventDefault()
-if (passkey === process.env.NEXT_PUBLIC_ADMIN_PASSKEY) {
+if (passkey === process.env.NEXT_PUBLIC_ADMIN_PASS) {
     const encryptedKey = encryptKey(passkey);
 
  Cookies.set("accessKey", encryptedKey, { expires: 1 });
