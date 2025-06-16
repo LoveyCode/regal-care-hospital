@@ -63,6 +63,10 @@ return parseStringify (appointment);
 }
 export const getRecentAppointmentList = async (): Promise<AppointmentStats | undefined> => {
     try {
+
+       console.log("Using DATABASE_ID:", DATABASE_ID);
+    console.log("Using APPOINTMENT_COLLECTION_ID:", APPOINTMENT_COLLECTION_ID);
+
       const appointments = await databases.listDocuments(
         DATABASE_ID!,
         APPOINTMENT_COLLECTION_ID!,
