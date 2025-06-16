@@ -1,4 +1,4 @@
- Regal Care Hospital – Healthcare Appointment Management System
+ Regal Care Hospital with Healthcare Appointment Management System
 
 Regal Care Hospital is a modern hosital with a responsive, and user-friendly healthcare appointment management system built using Next.js and Tailwind CSS. The platform allows patients to book appointments with doctors, check availability, and manage their healthcare interactions seamlessly.
 
