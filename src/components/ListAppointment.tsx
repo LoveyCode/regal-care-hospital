@@ -4,7 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { columns } from '@/components/table/columns';
-import { useAppointments } from '@/components/adminAppointment';
+import { useAppointments } from './useAppointments';
+
 
 
 export function ListAppointment() {
