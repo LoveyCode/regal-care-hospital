@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use server"
 
-import { ID, Models, Query } from "node-appwrite";
+import { ID, Models, Query, Permission, Role} from "node-appwrite";
 import { APPOINTMENT_COLLECTION_ID, DATABASE_ID, databases, messaging } from "../appwrite.config";
 import { formatDateTime, parseStringify } from "../utils";
 import { Appointment, AppointmentStats } from "../../../types/appwrite.type";
+
 
 
 export const isDoctorAvailable = async (doctorName: string, schedule: Date) => {
@@ -28,19 +29,23 @@ export const isDoctorAvailable = async (doctorName: string, schedule: Date) => {
 
 
 export const createAppointment = async (appointment: CreateAppointmentParams) => {
-    try{
-        const newAppointment =await databases.createDocument(
-            DATABASE_ID!,
-            APPOINTMENT_COLLECTION_ID!,
-            ID.unique(),
-            appointment
-          )
-          return parseStringify(newAppointment);
-    } catch (error) {
-        console.log(error);
-        
-    }
-}
+  try {
+    const newAppointment = await databases.createDocument(
+      DATABASE_ID!,
+      APPOINTMENT_COLLECTION_ID!,
+      ID.unique(),
+      appointment,
+      [
+        Permission.read(Role.any()), // or Role.user("ADMIN_USER_ID") for stricter access
+        // Add update/delete as needed
+      ]
+    );
+    return parseStringify(newAppointment);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
 
 export const getAppointment = async (appointmentId: string) => {
 try {
