@@ -1,7 +1,22 @@
+import { getRecentAppointmentList } from '@/lib/actions/appointment.actions';
+import { NextResponse } from 'next/server';
+
 export async function GET() {
-  console.log("TEST LOG: This is the /api/appointment handler running!");
-  return new Response(JSON.stringify({ message: "API is working!" }), {
-    status: 200,
-    headers: { "Content-Type": "application/json" },
-  });
+  try {
+    const data = await getRecentAppointmentList();
+    console.log("Fetched appointments:", data); // <-- Add this
+    return NextResponse.json(data, {
+      status: 200,
+      headers: {
+        'Cache-Control': 'no-store',
+      },
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error("API Error:", error.message); // <-- Add this
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+    console.error("API Error:", error);
+    return NextResponse.json({ error: String(error) }, { status: 500 });
+  }
 }
