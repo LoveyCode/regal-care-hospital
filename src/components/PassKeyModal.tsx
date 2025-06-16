@@ -35,7 +35,7 @@ const PassKeyModal = () => {
         const accessKey = encryptedKey && decryptKey(encryptedKey);
 
         if (path)
-            if (accessKey === process.env.NEXT_PUBLIC_ADMIN_PASS!.toString()) {
+            if (accessKey === process.env.NEXT_PUBLIC_ADMIN_PASSKEY!.toString()) {
               setOpen(false);
               router.push("/admin");
             } else {
@@ -50,7 +50,7 @@ const PassKeyModal = () => {
     
 const validatePasskey= (e: React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
 e.preventDefault()
-if (passkey === process.env.NEXT_PUBLIC_ADMIN_PASS) {
+if (passkey === process.env.NEXT_PUBLIC_ADMIN_PASSKEY) {
     const encryptedKey = encryptKey(passkey);
 
  Cookies.set("accessKey", encryptedKey, { expires: 1 });
