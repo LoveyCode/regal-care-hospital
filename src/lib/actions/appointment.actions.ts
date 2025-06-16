@@ -69,6 +69,7 @@ export const getRecentAppointmentList = async (): Promise<AppointmentStats | und
         [Query.orderDesc("$createdAt")]
       );
 
+         console.log("Fetched appointments:",  appointments.documents)
 
        const mappedAppointments: Appointment[] = appointments.documents.map((doc: Models.Document) => ({
       $id: doc.$id,
