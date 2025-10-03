@@ -5,7 +5,6 @@ import { NextResponse } from 'next/server';
 export async function GET() {
   try {
     const data = await getRecentAppointmentList();
-    console.log("Fetched appointments:", data); // <-- Add this
     return NextResponse.json(data, {
       status: 200,
       headers: {

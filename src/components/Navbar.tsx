@@ -6,6 +6,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { FiSun } from "react-icons/fi";
 import { MdOutlineDarkMode } from "react-icons/md";
 import Image from 'next/image';
+import { navItems } from '../../data/navItems';
 
 interface NavbarProps {
   theme: 'light' | 'dark'
@@ -46,7 +47,12 @@ const isOnPatientsPage = pathname === '/patients';
   return (
 <section className="w-full py-10 sticky top-0 z-50 backdrop-blur-md shadow-md bg-zinc-100 dark:bg-zinc-900 text-dark-300 dark:text-zinc-200 transition-all duration-300 ease-in-out">
 
-<div className="flex justify-start items-center px-2 xl:px-2">
+<div className=" flex justify-between items-center px-2 xl:px-2">
+
+  <button className='block lg:hidden' aria-label="Toggle Menu"
+  onClick={toggleMenu}>
+        {isOpen ? <X className='mx-6' size={28} /> : <Menu className='mx-6' size={28} />}
+      </button>
 
     {/* Logo */}
     <Image
@@ -59,65 +65,36 @@ const isOnPatientsPage = pathname === '/patients';
 
     {/* Desktop Nav */}
     <nav className="hidden mx-10 lg:flex items-center gap-5 xl:gap-8 text-base">
-      <a href="/" className="navitem">Home</a>
 
-      <div className="relative group">
-        <a className="navitem">About Us</a>
-      <motion.ul
-  className="ul-list  "
-  initial={{ opacity: 0, y: -10 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.3 }}
->
-  <li className="inner-nav-item"><a href="/about-us/about-us">About Us</a></li>
-  <li className="inner-nav-item"><a href="/about-us/from-the-ceos-desk">From the CEOs Desk</a></li>
-  <li className="inner-nav-item"><a href="/about-us/founder">The Founder</a></li>
-  <li className="inner-nav-item"><a href="/about-us/advisory-team">Advisory Team</a></li>
-  <li className="inner-nav-item"><a href="/about-us/media-gallery">Media Gallery</a></li>
-</motion.ul>
+      {navItems.map((item, i) => (
+        <div key={i} className="relative group">
+          {item.href ? (
+            <a href={item.href} className="navitem">{item.label}</a>
+          ) : (
+            <a className="navitem">{item.label}</a>
+          )}
 
-    
-    
-      </div>
 
-         <div className="relative group">
-        <a className="navitem">Services</a>
-            <motion.ul
-  className="ul-list "
-  initial={{ opacity: 0, y: -10 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.3 }}
->
-             <li className="inner-nav-item"><a href="#General-Outpatient-Consultation" >General Outpatient Consultation</a></li>
-          <li className="inner-nav-item"><a href="#Surgical-Services" >Surgical Services</a></li>
-          <li className="inner-nav-item"><a href="#Maternity-Childbirth-Services" >Maternity & Childbirth Services</a></li>
-          <li className="inner-nav-item"><a href="#Orthopedic-Trauma-Surgery-Services" >Orthopedic & Trauma Surgery Services</a></li>
-          <li className="inner-nav-item"><a href="#Diagnostic-Imaging-Services" >Diagnostic Imaging Services</a></li>
-          <li className="inner-nav-item"><a href="#Pharmacy" >Pharmacy</a></li>
-        </motion.ul>
-      </div>
-
-         <div className="relative group">
-        <a className="navitem">Department</a>
-                    <motion.ul
-  className="ul-list "
-  initial={{ opacity: 0, y: -10 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.3 }}
->
-          <li className="inner-nav-item"><a href="#General-Outpatient-Department" >General Outpatient Department</a></li>
-          <li className="inner-nav-item"><a href="#Surgical-Department" >Surgical Department</a></li>
-          <li className="inner-nav-item"><a href="#Maternity-Obstetrics-Department" >Maternity & Obstetrics Department</a></li>
-          <li className="inner-nav-item"><a href="#Pediatrics-Department" >Pediatrics Department</a></li>
-        <li className="inner-nav-item"><a href="#Orthopedic-Trauma-Surgery-Department" >Orthopedic & Trauma Surgery Department</a></li>
-       <li className="inner-nav-item"><a href="#Radiology-Diagnostic-Imaging-Department" >Radiology & Diagnostic Imaging Department</a></li>
-        <li className="inner-nav-item"><a href="#Pharmacy-Department" >Pharmacy Department</a></li>
-         </motion.ul>
-      </div>
-   
-      <a href="#contact" className="navitem">Contact</a>
-    
-      <a href="#portal" className="navitem">Blog</a>
+    {item.children && (
+            <AnimatePresence>
+              <motion.ul
+                className="ul-list absolute top-full left-0 rounded-md shadow-md overflow-hidden"
+                initial={{ opacity: 0, y: -100 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -100 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              >
+                {item.children.map((child, j) => (
+                  <li key={j} className="inner-nav-item">
+                    <a href={child.href}>{child.label}</a>
+                  </li>
+                ))}
+              </motion.ul>
+            </AnimatePresence>
+          )}
+            </div>
+      ))}
+     
     </nav>
 
     {/* Desktop Button */}
@@ -176,9 +153,7 @@ const isOnPatientsPage = pathname === '/patients';
 
     {/* Mobile Menu Toggle */}
 
-      <button onClick={toggleMenu}>
-        {isOpen ? <X className='mx-6' size={28} /> : <Menu className='mx-6' size={28} />}
-      </button>
+      
     </div>
   </div>
 
