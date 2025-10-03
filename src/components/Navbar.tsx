@@ -104,7 +104,7 @@ const isOnPatientsPage = pathname === '/patients';
   </button>
 
 <motion.button
-  className="btn mx-10 w-full hidden lg:block"
+  className="btn bg-yellow-600 before:bg-blue-300 mx-10 w-full hidden lg:block"
   animate={{ scale: [0.8, 1.25, 0.8] }}
   transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
    whileHover={isOnPatientsPage ? {} : { scale: 1 }}
@@ -122,8 +122,10 @@ const isOnPatientsPage = pathname === '/patients';
             height={20}
             className="animate-spin"
           />
-          Loading...
+
+          <p className='z-40'>Loading...</p>
         </div>
+
       ) : (
          <div className="flex items-center gap-4">
           <Image
@@ -131,10 +133,10 @@ const isOnPatientsPage = pathname === '/patients';
             alt="loader"
             width={20}
             height={20}
-            className='invert brightness-0'
+            className='invert brightness-0  '
           
           />
-        Book Appointment
+         <p className='z-40'> Book Appointment</p>
         </div>
       )}
 

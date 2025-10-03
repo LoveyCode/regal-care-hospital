@@ -6,8 +6,8 @@ import { socialMediaIcons } from '../../data'
 const Statements = () => {
   return (
 
-      <section className='w-full h-full '>  
-    <div className='flex flex-col lg:grid lg:grid-cols-[200px_800px] xl:grid-cols-[400px_600px] 2xl:grid-cols-[600px_400px] lg:gap-[20rem] xl:gap-[5rem]'>
+      <section className='w-full mt-40 h-auto '>  
+    <div className='flex flex-col lg:grid lg:grid-cols-[200px_800px] xl:grid-cols-[400px_600px] 2xl:grid-cols-[700px_400px] lg:gap-[20rem] xl:gap-[5rem] '>
      
         <div className=' relative w-[400px] h-[800px] md:pl-32 lg:pl-0 md:w-[500px]  md:h-[1000px]'>
 <Image 
@@ -30,7 +30,7 @@ const Statements = () => {
 </div>
 </div>
 
-<div className='absolute 2xl:top-[47rem] top-[37rem] md:top-[34.8rem] lg:top-[47rem] left-0 w-[45rem] md:w-[54rem] lg:w-[32.5rem] lg:h-[23rem] xl:w-[30rem] h-[13rem] md:h-[15rem] 2xl:w-[42.5rem] 2xl:h-[13rem] bg-blue-300 justify-center items-center'>
+<div className='absolute 2xl:top-[47rem] top-[37rem] md:top-[34.8rem] lg:top-[47rem] left-0 w-[45rem] md:w-[54rem] lg:w-[32.5rem] lg:h-[23rem] xl:w-[30rem] h-[13rem] md:h-[15rem] 2xl:w-[48.7rem] 2xl:h-[13rem] bg-blue-300 justify-center items-center'>
     <div className=' w-[38rem] md:w-[53rem] lg:w-[32.5rem]  justify-center items-center'>
 <h1 className='Home-sub-heading py-5 text-white px-5'>Our Branches</h1>
 <p className='text-xl md:text-3xl lg:text-2xl 2xl:text-2xl pb-0 font-medium text-zinc-200 px-5'>

@@ -1,48 +1,81 @@
 "use client";
-import React from 'react'
-import { motion } from "motion/react";
-import { ImagesSlider } from './ui/ImagesSlider';
-import { heroImages } from '../../data';
+import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ImagesSlider } from "./ui/ImagesSlider";
+import { heroImages } from "../../data";
+
+const heroHeadings = [
+  "Welcome to Regal Care Hospital",
+  "Excellence in Healthcare",
+  "Trusted Medical Experts",
+  "Your Health, Our Priority",
+  "Compassionate Patient Care",
+
+];
 
 export default function Hero() {
+  const [currentIndex, setCurrentIndex] = React.useState(0);
+
+  // auto-slide logic (optional)
+  React.useEffect(() => {
+    const t = setInterval(() => {
+      setCurrentIndex((i) => (i + 1) % heroImages.length);
+    }, 6000); // 6s per slide
+    return () => clearInterval(t);
+  }, []);
+
   return (
-   <section className="w-full overflow-hidden remove-scrollbar">
-      <div className="relative w-full h-full flex lg:px-0 items-center px-0 overflow-hidden">
-        {/* Description (Left) */}
+    <section className="w-full overflow-hidden relative">
+      <div className="relative w-full h-[30rem] lg:h-[37.5rem] xl:h-[50rem] 2xl:h-[43rem]">
+        {/* Images */}
+        <ImagesSlider
+          className="h-[30rem] lg:h-[37.5rem] xl:h-[50rem] 2xl:h-[43rem]"
+          images={heroImages}
+          imageProps={{
+            width: 1000,
+            height: 1000,
+          }}
+          overlay
+ overlayStyle={{
+  background: "rgba(0, 0, 0, 0.7)", // black/70
+}}
+        >
+          {(currentIndex: number) => (
+            <div className="z-50 text-center flex flex-col items-center">
+              <AnimatePresence mode="wait">
+                <motion.h1
+                  key={currentIndex} // ✅ re-animates per slide
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -50 }}
+                  transition={{ duration: 0.5 }}
+                  className="text-4xl lg:text-6xl font-bold text-white drop-shadow-lg"
+                >
+                  {heroHeadings[currentIndex]}
+                </motion.h1>
+              </AnimatePresence>
 
-
- <ImagesSlider
-  className="h-[30rem] lg:h-[37.5rem] xl:h-[50rem] 2xl:h-[43rem] mt-0 " 
-    images={heroImages}
-    imageProps={{
-      width: 1000,
-      height: 1000,
-
-    }}
-  >
-
-
-   
-      <motion.div
-        initial={{
-          opacity: 0,
-          y: -80,
-        }}
-        animate={{
-          opacity: 1,
-          y: 0,
-        }}
-        transition={{
-          duration: 0.6,
-        }}
-        className="z-50 flex flex-col justify-center items-center"
-      >
+              {/* Static Buttons */}
+              <div className="mt-6 flex gap-4">
+         <button
+  className="
+  btn bg-yellow-600 before:bg-blue-300 
+  "
+>
+  <span className="relative z-10">Book Appointment</span>
+</button>
+             <button
+  className="  btn bg-yellow-600 before:bg-blue-300 
  
-      </motion.div>
-    </ImagesSlider>
-         </div>
-         </section>
+  "
+>
+  <span className="relative z-10">Send Email</span>
+</button>
+              </div>
+            </div>
+          )}
+        </ImagesSlider>
+      </div>
+    </section>
   );
 }
-
-  

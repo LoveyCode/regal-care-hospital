@@ -11,7 +11,7 @@ type ImageItem = {
 
 type ImageSliderProps = {
   images: ImageItem[];
-  children: React.ReactNode;
+  children: ((currentIndex: number) => React.ReactNode) | React.ReactNode;
   imageProps?: {
     width?: number;
     height?: number;
@@ -19,6 +19,7 @@ type ImageSliderProps = {
   };
   overlay?: React.ReactNode;
   overlayClassName?: string;
+  overlayStyle?: React.CSSProperties;   
   className?: string;
   autoplay?: boolean;
   direction?: "up" | "down";
@@ -113,14 +114,14 @@ export const ImagesSlider = ({
       opacity: 1,
       y: "-150%",
       transition: {
-        duration: 1,
+        duration: 0.5,
       },
     },
     downExit: {
       opacity: 1,
       y: "150%",
       transition: {
-        duration: 1,
+        duration: 0.5,
       },
     },
   };
@@ -135,11 +136,18 @@ export const ImagesSlider = ({
       )}
       style={{ perspective: "1000px" }}
     >
-      {areImagesLoaded && children}
-      {areImagesLoaded && overlay && (
-        <div
-          className={cn("absolute inset-0 bg-transparent", overlayClassName)}
-        />
+   {areImagesLoaded && 
+  (typeof children === "function" 
+    ? (children as (currentIndex: number) => React.ReactNode)(currentIndex) 
+    : children)}
+
+    {areImagesLoaded && overlay && (
+       <div
+    className={cn("absolute inset-0 z-20", overlayClassName)}
+    style={{
+            background:
+             "rgba(0, 0, 0, 0.8)", // black/70
+          }}/>
       )}
 
       {areImagesLoaded && (
@@ -157,6 +165,9 @@ export const ImagesSlider = ({
               alt={images[currentIndex].alt || `Slide ${currentIndex + 1}`}
               width={imageProps?.width || 1000}
               height={imageProps?.height || 1000}
+              priority={currentIndex === 0} // ✅ first image loads immediately
+              placeholder="blur" // ✅ blurred preview
+              blurDataURL="/assets/images/blur-placeholder.jpg" // tiny blur fallback
               className={cn(
                 "object-cover object-center w-full h-full shadow-lg",
                 imageProps?.className

@@ -178,31 +178,36 @@ export const hospitals = [
     {
     id: 1,
     src: "/assets/images/bg1.jpg",
-    alt: "Hero image 1",
+    alt: "Hero image 2",
+
     },
 
     {
       id: 2,
       src: "/assets/images/bg2.jpg",
-      alt: "Hero image 2",
+      alt: "Hero image 1",
+
       },
 
       {
         id: 3,
         src: "/assets/images/bgThree.jpg",
         alt: "Hero image 3",
+     
         },
 
          {
             id: 5,
             src: "/assets/images/bg5.jpg",
             alt: "Hero image 5",
+     
             },
 
         {
           id: 4,
           src: "/assets/images/bgFour.jpg",
           alt: "Hero image 4",
+   
           },
 
          
