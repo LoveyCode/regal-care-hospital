@@ -14,15 +14,10 @@ const heroHeadings = [
 ];
 
 export default function Hero() {
-  const [currentIndex, setCurrentIndex] = React.useState(0);
+ 
 
   // auto-slide logic (optional)
-  React.useEffect(() => {
-    const t = setInterval(() => {
-      setCurrentIndex((i) => (i + 1) % heroImages.length);
-    }, 6000); // 6s per slide
-    return () => clearInterval(t);
-  }, []);
+
 
   return (
     <section className="w-full overflow-hidden relative">
@@ -59,16 +54,11 @@ export default function Hero() {
               <div className="mt-6 flex gap-4">
          <button
   className="
-  btn bg-yellow-600 before:bg-blue-300 
-  "
->
+  btn bg-yellow-600 before:bg-blue-300">
   <span className="relative z-10">Book Appointment</span>
 </button>
-             <button
-  className="  btn bg-yellow-600 before:bg-blue-300 
- 
-  "
->
+  <button
+  className="  btn bg-yellow-600 before:bg-blue-300">
   <span className="relative z-10">Send Email</span>
 </button>
               </div>
