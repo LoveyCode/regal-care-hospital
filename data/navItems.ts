@@ -9,7 +9,7 @@ export const navItems = [
     label: "About Us",
     children: [
       { label: "About Us", href: "/about-us/about-us" },
-      { label: "From the CEOs Desk", href: "/about-us/from-the-ceos-desk" },
+      { label: "From the CEOs Desk", href: "/about-us/ceos-desk" },
       { label: "The Founder", href: "/about-us/founder" },
       { label: "Advisory Team", href: "/about-us/advisory-team" },
       { label: "Media Gallery", href: "/about-us/media-gallery" },

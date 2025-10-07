@@ -1,6 +1,6 @@
 import React from 'react'
 import { notFound } from "next/navigation";
-import { contentMap } from '../../../../data/pagesInfoData';
+import { contentMap } from '../../../../data/PagesContent';
 import PagesBackgroundHeader from '@/components/PagesBackgroundHeader';
 
 

@@ -20,7 +20,7 @@ const Statements = () => {
 />
 <div className='absolute hidden lg:flex xl:hidden top-[25rem] left-0 lg:w-[32.5rem] lg:h-[20rem]  bg-yellow-600 justify-center items-center'>
     <div className='justify-center items-center'>
-<h1 className='Home-sub-heading py-5 text-white px-5'>Our Vision</h1>
+<h3 className='Home-sub-heading py-5 text-white px-5'>Our Vision</h3>
 <p className='statement-text px-6'>
  To be a trusted leader in healthcare, 
     recognized for our excellence in patient care, 
@@ -32,7 +32,7 @@ const Statements = () => {
 
 <div className='absolute 2xl:top-[47rem] top-[37rem] md:top-[34.8rem] lg:top-[47rem] left-0 w-[45rem] md:w-[54rem] lg:w-[32.5rem] lg:h-[23rem] xl:w-[30rem] h-[13rem] md:h-[15rem] 2xl:w-[48.7rem] 2xl:h-[13rem] bg-blue-300 justify-center items-center'>
     <div className=' w-[38rem] md:w-[53rem] lg:w-[32.5rem]  justify-center items-center'>
-<h1 className='Home-sub-heading py-5 text-white px-5'>Our Branches</h1>
+<h3 className='Home-sub-heading py-5 text-white px-5'>Our Branches</h3>
 <p className='text-xl md:text-3xl lg:text-2xl 2xl:text-2xl pb-0 font-medium text-zinc-200 px-5'>
 57 Olivia Embra Close, Lagos, Nigeria <br/>
 13 Shelly Road, Port Harcourt, Nigeria <br/>

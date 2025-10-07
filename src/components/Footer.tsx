@@ -3,7 +3,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="  bg-zinc-100 dark:bg-zinc-900 text-dark-300 dark:text-zinc-200  py-40">
+    <footer className="  bg-zinc-100 w-full dark:bg-zinc-900 text-dark-300 dark:text-zinc-200  py-40">
       {/* Logo Section */}
       <div className="flex justify-center">
         <Image

@@ -18,7 +18,7 @@ const Afterhero = ({ title, icon }: PageDivideProps) => {
       {/* Content below the arrow */}
       <div className="flex gap-3 p-5 pt-12 justify-center items-center">
         <div>{icon}</div>
-        <div >{title}</div>
+        <div>{title}</div>
       </div>
     </div>
   );

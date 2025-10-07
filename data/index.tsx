@@ -13,82 +13,82 @@ type GalleryItem = {
 
 export const galleryItems: GalleryItem[] = [
   {
-    image: '/gallery1.jpg',
+    image: '/assets/images/bg5.jpg',
     department: 'General Outpatient',
     caption: 'Consultation with our general physician.',
   },
   {
-    image: '/gallery2.jpg',
+    image: "/assets/images/bg2.jpg",
     department: 'Surgical Services',
     caption: 'Team performing a laparoscopic surgery.',
   },
   {
-    image: '/gallery3.jpg',
+    image: '/assets/images/MaternityWard.jpg',
     department: 'Maternity Ward',
     caption: 'Newborn care provided by our nurses.',
   },
   {
-    image: '/gallery4.jpg',
+    image: '/assets/images/OrthopedicsTrauma.jpg',
     department: 'Orthopedic Unit',
     caption: 'Joint rehabilitation session in progress.',
   },
   {
-    image: '/gallery5.jpg',
+    image: '/assets/images/Ultrasound.jpg',
     department: 'Diagnostic Imaging',
     caption: 'Ultrasound scan in the radiology unit.',
   },
   {
-    image: '/gallery6.jpg',
+    image: '/assets/images/pharmacy.jpg',
     department: 'Pharmacy',
     caption: 'Pharmacists dispensing medication.',
   },
   {
-    image: '/gallery7.jpg',
+    image: '/assets/images/EmmergencyCase.jpeg',
     department: 'Emergency Unit',
     caption: 'Doctors attending to an emergency case.',
   },
   {
-    image: '/gallery8.jpg',
+    image: '/assets/images/Prenatal-care.jpg',
     department: 'Childbirth Services',
     caption: 'Mother receiving post-natal care.',
   },
   {
-    image: '/gallery9.jpg',
+    image: '/assets/images/Consultation.jpg',
     department: 'Consultation Room',
     caption: 'Patient review with consultant.',
   },
   {
-    image: '/gallery10.jpg',
+    image: '/assets/images/SurgicalRoom.jpg',
     department: 'Surgical Prep Room',
     caption: 'Preparing patient for surgery.',
   },
   {
-    image: '/gallery11.jpg',
+    image: '/assets/images/kidney-dialysis.jpg',
     department: 'Dialysis Unit',
     caption: 'Patient undergoing dialysis session.',
   },
   {
-    image: '/gallery12.jpg',
+    image: '/assets/images/ChildreanRoutineUp.jpeg',
     department: 'Pediatric Unit',
     caption: 'Routine check-up for a child.',
   },
   {
-    image: '/gallery13.jpg',
+    image: '/assets/images/reception.jpg',
     department: 'Reception',
     caption: 'Welcoming patients at the front desk.',
   },
   {
-    image: '/gallery14.jpg',
+    image: '/assets/images/blood-donation.png',
     department: 'Lab Services',
     caption: 'Blood samples being analyzed.',
   },
   {
-    image: '/gallery15.jpg',
+    image: '/assets/images/Child-Immunizations.jpg',
     department: 'Vaccination Centre',
     caption: 'Administering childhood immunizations.',
   },
   {
-    image: '/gallery16.jpg',
+    image: '/assets/images/bgThree.jpg',
     department: 'Ward Rounds',
     caption: 'Doctors conducting early morning rounds.',
   },
@@ -178,14 +178,14 @@ export const hospitals = [
     {
     id: 1,
     src: "/assets/images/bg1.jpg",
-    alt: "Hero image 2",
+    alt: "Hero image 1",
 
     },
 
     {
       id: 2,
       src: "/assets/images/bg2.jpg",
-      alt: "Hero image 1",
+      alt: "Hero image 2",
 
       },
 

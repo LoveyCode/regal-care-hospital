@@ -22,7 +22,7 @@ const PagesBackgroundHeader = ({ title, description, className }: Props) => {
       <div className="absolute inset-0 w-full h-full bg-slate-900 z-10 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
 
       {/* Layer 2: Faded slanted logo on the left (responsive) */}
-      <div className="absolute left-[-10px] sm:left-[-60px] md:left-[-100px] top-1/2 transform -translate-y-1/2 rotate-[-20deg] opacity-10 z-10 pointer-events-none">
+      <div className="absolute left-[-10px] sm:left-[-60px] md:left-[-100px] top-1/2 transform -translate-y-1/2 rotate-[-20deg] opacity-30 z-10 pointer-events-none">
         <Image
           src="/assets/icons/logo-full.svg" // Replace with your actual logo path
           alt="Background Logo"
@@ -36,11 +36,18 @@ const PagesBackgroundHeader = ({ title, description, className }: Props) => {
       <Boxes />
 
       {/* Layer 4: Foreground content */}
-      <h1 className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold relative z-20 text-center">
-        {title}
-      </h1>
+      <h1 className="text-5xl lg:text-6xl font-bold relative z-20 text-center">
+  {title.split(" ").map((word, index) => (
+    <span
+      key={index}
+      className={index % 2 === 1 ? "text-blue-300" : "text-neutral-300"} // alternate colors
+    >
+      {word}{" "}
+    </span>
+  ))}
+</h1>
       {description && (
-        <p className="text-center mt-2 text-sm sm:text-base md:text-lg text-neutral-300 relative z-20 px-4 sm:px-0">
+        <p className="text-center mt-2 text-lg sm:text-base md:text-xl text-yellow-600 relative z-20 px-4 sm:px-0">
           {description}
         </p>
       )}

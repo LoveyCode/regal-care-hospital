@@ -33,7 +33,7 @@ const AdvisoryTeam = () => {
             {/* Text beside image */}
             <div className="md:flex-1">
               {/* Show name/title statically for mobile */}
-              <div className="md:hidden mb-2">
+              <div className="lg:hidden mb-2">
                 <h3 className="text-lg font-semibold">{advisor.name}</h3>
                 <p className="text-sm text-gray-600">{advisor.title}</p>
               </div>
