@@ -11,6 +11,7 @@ interface Props {
   };
 }
 
+
 export default function InfoPage({ params }: Props) {
     
 const section = contentMap[params.info]?.[params.infoContent];

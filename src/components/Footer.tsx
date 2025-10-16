@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className="  bg-zinc-100 w-full dark:bg-zinc-900 text-dark-300 dark:text-zinc-200  py-40">
       {/* Logo Section */}
-      <div className="flex justify-center">
+      <div className="flex w-full justify-center">
         <Image
           src="/assets/icons/logo-full.svg"
           alt="Regal Care Logo"

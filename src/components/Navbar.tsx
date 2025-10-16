@@ -14,10 +14,8 @@ interface NavbarProps {
 }
 
   const Navbar =({theme, onToggleTheme}: NavbarProps) => {
-
-   const router = useRouter();
-
-
+  const router = useRouter();
+  
   const [isOpen, setIsOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);

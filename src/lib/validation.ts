@@ -165,3 +165,18 @@ export function getAppointmentSchema(type: string) {
       return ScheduleAppointmentSchema;
   }
 }
+
+// lib/validators.ts
+export function validateCreatePost(payload: any) {
+  if (!payload) return { ok: false, error: "Missing payload" };
+  if (typeof payload.title !== "string" || payload.title.trim().length < 3) {
+    return { ok: false, error: "Title is required and must be at least 3 characters" };
+  }
+  if (typeof payload.slug !== "string" || payload.slug.trim().length < 3) {
+    return { ok: false, error: "Slug is required" };
+  }
+  if (typeof payload.content !== "string" || payload.content.trim().length < 10) {
+    return { ok: false, error: "Content is required and must be at least 10 characters" };
+  }
+  return { ok: true, value: payload };
+}

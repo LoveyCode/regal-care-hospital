@@ -1,0 +1,147 @@
+Explaination
+
+1. The route parameter: [slug]
+
+In Next.js, when you name a folder [slug], it means this page is dynamic — the value inside the brackets will be available in the params object.
+
+For example:
+
+/blog/understanding-preventive-healthcare
+
+
+will give you
+params.slug = "understanding-preventive-healthcare".
+
+2. Defining the props type
+type Props = {
+  params: { slug: string };
+};
+
+
+This tells TypeScript that this page expects to receive one prop:
+
+params → an object that has one key: slug (a string).
+
+This is how Next.js automatically passes the URL parameter into your page component.
+
+
+3. The main page component
+export default async function PostPage({ params }: Props) {
+  const post = await getPostBySlug(params.slug);
+
+
+This is a Server Component, so it can run database queries directly.
+
+It calls your service function getPostBySlug(), which connects to MongoDB and retrieves the post document with that slug.
+
+4. Handling missing or unpublished posts
+If the database returns null (no post found) or the post’s published flag is false,
+then it renders a simple “Not found” message instead of the post.
+
+This is important for SEO and user experience — it prevents showing draft or deleted posts.
+
+🔹 5. Rendering the post content
+
+If a valid published post is found, it returns an <article> showing the blog content:
+
+<article className="max-w-4xl mx-auto px-4 py-12">
+
+
+That’s a centered, padded layout for the article body.
+
+
+🧩 a) The header
+<header className="mb-6">
+  <h1 className="text-3xl lg:text-4xl font-bold">{post.title}</h1>
+  <p className="text-sm text-muted mt-2">
+    {new Date(post.createdAt).toLocaleDateString()} • {post.author} • {post.tags?.join(", ")}
+  </p>
+</header>
+
+
+This displays:
+
+The title (post.title)
+
+The publish date (createdAt)
+
+The author’s name
+
+The tags (joined by commas)
+
+new Date(post.createdAt)
+➡️ Creates a JavaScript Date object from the stored timestamp.
+
+.toLocaleDateString()
+➡️ Converts that date to something like:
+
+"10/8/2025" (US format)
+
+or "08/10/2025" (UK format)
+depending on your locale (your system language).
+
+
+.toLocaleDateString()
+➡️ Converts that date to something like:
+
+"10/8/2025" (US format)
+
+or "08/10/2025" (UK format)
+depending on your locale (your system language).
+
+Example:
+
+const date = new Date("2025-10-08T19:30:00.000Z");
+console.log(date.toLocaleDateString());
+// Output might be: "10/8/2025"
+If you wanted a more readable format, you could pass locale + options:
+
+
+If you wanted a more readable format, you could pass locale + options:
+
+date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+// Output: "October 8, 2025"
+
+🧩 4. {post.tags?.join(", ")}
+making it optional so that your project does not break if it is not provided
+
+What it means:
+
+post.tags is expected to be an array of strings, e.g.:
+
+["Health", "Wellness", "Nutrition"]
+
+
+.join(", ") merges that array into a single string separated by commas:
+
+
+🖼 b) The cover image
+{post.coverImage && (
+  <img
+    src={post.coverImage}
+    alt={post.title}
+    className="w-full rounded-lg mb-6"
+  />
+)}
+
+
+If the post has a cover image URL, it shows it at the top of the article.
+
+✍️ c) The article content
+<section className="prose max-w-none">
+  <MarkdownRenderer content={post.content} />
+</section>
+
+
+This section displays the main post content (usually in Markdown format).
+
+The MarkdownRenderer component:
+
+Converts Markdown text (e.g., # Heading, **bold**, lists, etc.) into styled HTML.
+
+Adds styling through Tailwind’s prose class.
+
+
+
+
+

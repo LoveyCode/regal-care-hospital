@@ -11,7 +11,7 @@ const Statements = () => {
      
         <div className=' relative w-[400px] h-[800px] md:pl-32 lg:pl-0 md:w-[500px]  md:h-[1000px]'>
 <Image 
-            src="/assets/images/statementImg.png" 
+            src="/assets/images/statementImg.png"  
             alt="Statement Image"
             width={1000}
             height={1000}

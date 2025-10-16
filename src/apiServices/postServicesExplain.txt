@@ -1,0 +1,339 @@
+import { connectDB } from "@/lib/mongodb";
+import { Post, IPost } from "@/models/post";
+connectDB: a helper function that connects to your MongoDB cluster using Mongoose.
+
+Post: your Mongoose model (like User, Product, etc.).
+
+IPost: the TypeScript interface that defines what a Post document looks like (title, content, slug, tags, etc.).
+
+
+
+2️⃣ Defining options for listing posts
+export type PostListOptions = {
+  page?: number;
+  limit?: number;
+  search?: string;
+  tags?: string[];
+  publishedOnly?: boolean;
+};
+
+
+This defines what kind of options you can pass to the function that lists posts (getPosts).
+
+Let’s break it down:
+
+Field	Type	Meaning
+page?	number	which page number you want (for pagination)
+limit?	number	how many posts per page
+search?	string	search keyword (for filtering posts)
+tags?	string[]	list of tags to filter posts by
+publishedOnly?	boolean	if true, only return published posts
+
+
+🟢 Why use type and not interface?
+
+You could use either one here — both work, but there’s a nuance:
+
+✅ Use type when you want to describe an object shape (like { page?: number; })
+and maybe combine it with union types, intersections, or literal types later.
+
+✅ Use interface when defining data models or objects that may be extended or implemented by a class.
+
+In this context, PostListOptions is not a data model — it’s just a function argument type.
+So using type is lightweight and perfect for this use.
+
+👉 You could also have written:
+
+export interface PostListOptions { ... }
+
+
+and it would still work fine — it’s mostly stylistic here.
+
+
+
+export async function createPost(payload: Partial<IPost>) {
+  await connectDB();
+  const p = new Post(payload);
+  return p.save();
+}
+Breakdown:
+
+Partial<IPost> means the argument can contain some or all properties of IPost.
+(You might not provide every field when creating.)
+
+connectDB() ensures MongoDB is connected before doing anything.
+
+new Post(payload) creates a new Mongoose post document.
+
+.save() writes it to the database.
+
+
+
+5️⃣ Get multiple posts (list)
+export async function getPosts(options: PostListOptions = {}) {
+  await connectDB();
+  const page = Math.max(1, options.page ?? 1);
+  const limit = Math.min(50, options.limit ?? 10);
+  const skip = (page - 1) * limit;
+
+
+options: PostListOptions = {} → default to empty if none provided.
+
+page ?? 1 → use 1 if page is undefined.
+
+Math.max(1, ...) → make sure page number is not below 1.
+
+limit ?? 10 → default 10 posts per page.
+
+Math.min(50, limit) → cap at 50 max per page.
+
+skip → used for pagination (page 2 skips first 10 items, etc.).
+
+
+
+
+6️⃣ Building the MongoDB query filter
+const filter: any = {};
+if (options.publishedOnly !== false) filter.published = true;
+if (options.search) {
+  filter.$or = [
+    { title: new RegExp(options.search, "i") },
+    { excerpt: new RegExp(options.search, "i") },
+    { content: new RegExp(options.search, "i") },
+  ];
+}
+if (options.tags && options.tags.length) filter.tags = { $in: options.tags };
+
+
+Let’s unpack this carefully:
+
+Code	Meaning
+filter: any = {}	start with an empty query object
+filter.published = true	only show published posts by default
+new RegExp(options.search, "i")	case-insensitive search (matches anywhere in title, excerpt, or content)
+$or	tells MongoDB “match any of these fields”
+$in	matches posts that have any of the given tags
+
+✅ Result: this filter dynamically changes based on what the user is searching for or filtering by.
+
+
+const [items, total] = await Promise.all([
+  Post.find(filter).sort({ createdAt: -1 }).skip(skip).limit(limit).lean().exec(),
+  Post.countDocuments(filter),
+]);
+Promise.all() runs both at once for speed.
+
+items: fetches the actual posts.
+
+total: counts how many posts match the filter.
+
+.sort({ createdAt: -1 }) sorts newest first.
+
+.skip() and .limit() implement pagination.
+
+
+
+8️⃣ Return structured data
+return {
+  items,
+  total,
+  page,
+  limit,
+  pages: Math.ceil(total / limit) || 1,
+};
+
+
+This provides everything your frontend needs to:
+
+Display posts
+
+pages: Math.ceil(total / limit) || 1
+means:
+
+“Calculate how many pages are needed by dividing total posts by posts per page,
+round up to the nearest integer, and default to 1 if the result is invalid.”
+
+💬 Plain English version:
+“If you have 27 posts and you’re showing 8 per page, you’ll need 4 pages.
+But if there are no posts, still show at least 1 empty page.”
+
+
+
+✅ Example in context:
+total	limit	total/limit	Math.ceil	          pages
+27	     8	   3.375	     4	              ✅ 4 pages
+16	     8	   2	         2	              ✅ 2 pages
+0	       8	   0	         0 → fallback	    ✅ 1 page
+
+
+
+9️⃣ Update post by slug
+export async function updatePostBySlug(slug: string, updates: Partial<IPost>) {
+  await connectDB();
+  return Post.findOneAndUpdate({ slug }, updates, { new: true }).exec();
+}
+
+
+Finds a post by its slug and updates the provided fields.
+{ new: true } ensures it returns the updated version, not the old one.
+
+
+
+🔟 Delete post by slug
+export async function deletePostBySlug(slug: string) {
+  await connectDB();
+  return Post.findOneAndDelete({ slug }).exec();
+}
+
+
+Deletes the post matching the slug.
+
+
+
+🔟 Delete post by slug
+export async function deletePostBySlug(slug: string) {
+  await connectDB();
+  return Post.findOneAndDelete({ slug }).exec();
+}
+
+
+Deletes the post matching the slug.
+
+🧠 Summary Table
+Function	Purpose
+createPost()	Insert new post
+getPostBySlug()	Get a single post by unique slug
+getPosts()	List posts with search, tag, and pagination support
+updatePostBySlug()	Edit post fields
+deletePostBySlug()	Remove a post from DB
+
+✅ In short:
+This file is the “Post service layer” —
+a clean, reusable module that isolates all MongoDB queries in one place.
+
+That’s why your React pages don’t need to know about database details — they just call functions like:
+
+const posts = await getPosts();
+const post = await getPostBySlug(slug);
+
+
+
+
+
+
+About Type and interface
+You can also extend interfaces:
+
+interface Person {
+  name: string;
+}
+interface Employee extends Person {
+  position: string;
+}
+
+
+Interfaces are best when describing data models, class contracts, or API response shapes — things that describe what an object looks like.
+
+🧠 2. What is a Type Alias?
+
+A type alias is more flexible — it can describe any type, not just object shapes.
+
+You can use it for:
+
+Unions (|)
+
+Intersections (&)
+
+Primitive aliases
+
+Function types
+
+Complex combinations
+
+Example:
+type ID = string | number;
+
+type User = {
+  name: string;
+  age: number;
+};
+
+type ApiResponse = User | { error: string };
+
+
+So while interface is limited to describing objects and classes,
+type can describe almost anything.
+
+
+
+
+
+
+🧩 1. Meaning of payload
+
+The word payload simply means the actual data being sent or received.
+It’s a common term in APIs or backend logic — think of it as “the body of the request.”
+
+For example, when you create a blog post, you might send this from your frontend:
+
+{
+  "title": "My First Post",
+  "content": "Hello world!",
+  "tags": ["intro"]
+}
+
+
+That JSON object is your payload — it contains the actual information the backend needs to create something in the database.
+
+So in this function:
+
+export async function createPost(payload: Partial<IPost>) {
+  await connectDB();
+  const p = new Post(payload);
+  return p.save();
+}
+
+
+payload is the data you pass in to create a new Post document.
+
+
+
+
+  return Post.findOne({ slug }).lean<IPost>().exec();
+🧠 Putting it all together:
+
+Let’s rewrite that line in plain English:
+
+“Find one post document in MongoDB where the slug matches the given slug,
+return it as a plain JavaScript object (typed as IPost),
+and execute the query immediately.”
+
+✅ Final Flow (in your getPostBySlug):
+export async function getPostBySlug(slug: string) {
+  await connectDB();                     // make sure MongoDB is connected
+  return Post.findOne({ slug })          // find a post where slug matches
+    .lean<IPost>()                       // return a lightweight plain object
+    .exec();                             // execute the query (returns a Promise)
+}
+
+
+Result when called:
+
+const post = await getPostBySlug("my-first-post");
+
+console.log(post.title); // ✅ works, typed as string
+console.log(post.content); // ✅ works
+
+
+
+💡 Summary Table:
+Part	Meaning	Purpose
+Post	Mongoose model	Represents your MongoDB collection
+.findOne({ slug })	Query	Finds one document with a matching slug
+.lean()	Optimization	Converts Mongoose document → plain JS object
+<IPost>	TypeScript generic	Adds type safety to the result
+.exec()	Execution method	Runs the query and returns a Promise
+
+
+
+

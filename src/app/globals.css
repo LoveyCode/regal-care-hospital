@@ -423,3 +423,36 @@
   color: #1a1d21;
 }
 
+.ticker-viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+/* the moving track */
+.ticker-track {
+  display: inline-flex;           /* keeps width equal to content */
+  align-items: center;
+  gap: 10rem;                      /* space between messages */
+  white-space: nowrap;
+  will-change: transform;
+  animation: marquee 40s linear infinite; /* slow it down here */
+}
+
+/* individual items */
+.ticker-item {
+  flex: 0 0 auto;
+  color: #fff;
+  font-style: italic;
+  font-size: 1rem;
+}
+
+/* pause on hover (optional) */
+.ticker-viewport:hover .ticker-track {
+  animation-play-state: paused;
+}
+
+/* duplicate-content seamless loop */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); } /* only half because we duplicate */
+}

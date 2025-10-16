@@ -44,7 +44,7 @@ export const navItems = [
   },
   {
     label: "Blog",
-    href: "#portal",
+    href: "/blog",
   },
 ];
 

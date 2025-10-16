@@ -32,7 +32,7 @@ export default function Hero() {
           }}
           overlay
  overlayStyle={{
-  background: "rgba(0, 0, 0, 0.7)", // black/70
+  background: "rgba(0, 0, 0, 0.1)", // black/30
 }}
         >
           {(currentIndex: number) => (

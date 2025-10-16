@@ -1,0 +1,76 @@
+1. type Props = { searchParams?: 
+  { page?: string; 
+    q?: string 
+  } };
+
+  1️⃣ What exactly is searchParams?
+
+searchParams is not something you defined manually —
+it is automatically provided by Next.js (starting from version 13+ when using the App Router). And we are using here because we will later do pagination in the page and search by catergory later.
+
+page is the no of page 
+q is the category
+
+we can give other names like page no and category
+
+This defines the shape of props that the BlogPage component will receive.
+
+searchParams — represents query parameters from the URL, e.g.
+/blog?page=2&q=health
+
+? after searchParams means it’s optional — the page might be /blog (no query params).
+The ? in /blog?page=2 isn’t from TypeScript — it’s just how query strings are written in URLs.
+
+2. const page = Number(searchParams?.page ?? 1);
+const q = searchParams?.q ?? undefined;
+
+
+🔹 searchParams?.page ?? 1
+The ?. (optional chaining) means “if searchParams exists, get page”.
+
+The ?? (nullish coalescing operator) means “if the left side is null or undefined, use the right side”.
+
+So:
+
+If ?page=2, then page = Number("2") → 2
+
+If no page in the URL, it defaults to 1.
+
+This ensures your pagination always has a valid number.
+
+🔹 searchParams?.q ?? undefined
+Similar logic:
+
+If ?q=wellness, then q = "wellness".
+
+If there’s no q in the URL, it becomes undefined.
+
+
+Fetching posts from the database
+const data = await getPosts({ page, limit: 8, search: q, publishedOnly: true });
+
+
+This line calls your database query function getPosts() with these parameters:
+
+Parameter	Meaning
+page	Current page number (for pagination)
+limit: 8	Only fetch 8 posts per page
+search: q	Optional keyword filter (if the user searched something)
+publishedOnly: true	Fetch only published posts (not drafts)
+
+
+Example:
+If the user visits /blog?page=2&q=health,
+it will run:
+
+getPosts({ page: 2, limit: 8, search: "health", publishedOnly: true })
+
+   {data.items.map((post: any) => (
+          <BlogCard key={post.slug} post={post} />
+        ))}
+
+        explaining the syntaxs
+        data is an object and that is why it has {}
+        .map is a function so it will have () to show it is a function
+        it is taking an input called post so should have ()unless it is an object. but cant use an object to map.
+        then it is an arrow fn
