@@ -1,7 +1,7 @@
 "use client";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { UseFormRegister, UseFormWatch } from "react-hook-form";
+import { UseFormRegister } from "react-hook-form";
 import { PostFormData } from "../../../types/blog";
 import ReactMarkdown from "react-markdown";
 

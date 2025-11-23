@@ -105,14 +105,14 @@ const getCount = (slug?: string) => {
         className="relative rounded-2xl overflow-hidden group"
       >
         <div className="flex flex-1 lg:hidden w-full h-[300px] lg:h-[600px]"> 
-        <img
+        <Image
           src={latest.coverImage || "/placeholder.jpg"}
           alt={latest.title}
           className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
         </div>
 
-           <img
+           <Image
           src={latest.coverImage || "/placeholder.jpg"}
           alt={latest.title}
           className="absolute inset-0 w-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -149,7 +149,7 @@ const getCount = (slug?: string) => {
                  <div className="block lg:hidden">
             <div className="relative grid grid-cols-[1fr_2fr] ">   
             <div className="relative flex flex-1 w-[100px] h-[100px] lg:h-full lg:w-full">
-            <img
+            <Image
               src={post.coverImage || "/placeholder.jpg"}
               alt={post.title}
               className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -177,7 +177,7 @@ const getCount = (slug?: string) => {
 
           {/* --- Right Column (2 Smaller Boxes) --- */}
         <div className="hidden lg:block">   
-              <img
+              <Image
               src={post.coverImage || "/placeholder.jpg"}
               alt={post.title}
               className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -199,9 +199,6 @@ const getCount = (slug?: string) => {
               </div>
             </div>
             </div>
-            
-
-
           </Link>
         ))}
       </div>
@@ -284,10 +281,6 @@ const getCount = (slug?: string) => {
         </aside>
       
     </div>
- 
-
-
-
     </motion.article>
   );
 }

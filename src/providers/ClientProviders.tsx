@@ -16,8 +16,6 @@ export default function ClientProviders({ children }: { children: React.ReactNod
         <ThemeProvider attribute="class" defaultTheme="light">
           {children}
         </ThemeProvider>
-     
-
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );

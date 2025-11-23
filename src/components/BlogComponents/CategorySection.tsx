@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { IPost } from "../../../types/blog";
+import Image from "next/image";
 
 export default function CategorySection({ category }: { category: string }) {
   const { data, isLoading, error } = useQuery({
@@ -69,14 +70,14 @@ export default function CategorySection({ category }: { category: string }) {
           className="relative rounded-2xl overflow-hidden group"
         >
            <div className="flex flex-1  w-full h-[300px]"> 
-          <img
+          <Image
             src={latest.coverImage || "/placeholder.jpg"}
             alt={latest.title}
             className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
           </div>
 
-               <img
+               <Image
             src={latest.coverImage || "/placeholder.jpg"}
             alt={latest.title}
             className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -110,7 +111,7 @@ export default function CategorySection({ category }: { category: string }) {
               href={`/blog/${post.slug}`}
               className="relative rounded-xl overflow-hidden group"
             >
-              <img
+              <Image
                 src={post.coverImage || "/placeholder.jpg"}
                 alt={post.title}
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"

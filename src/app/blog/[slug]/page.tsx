@@ -2,9 +2,9 @@ import MarkdownRenderer from "@/components/BlogComponents/MarkdownRenderer";
 import SectionHeading from "@/components/sectionHeading";
 import { getPostBySlug } from "@/apiServices/postServices";
 import Link from "next/link";
-import { toast } from "sonner";
 import CommentForm from "@/components/BlogComponents/CommentForm";
 import { getCommentsForPost } from "@/apiServices/commentServices";
+import Image from "next/image";
 
 // Fetch comments by slug
 async function getComments(slug: string) {
@@ -53,7 +53,7 @@ export default async function PostPage({ params }: { params: { slug: string } })
 
         {/* FEATURE IMAGE */}
         {post.coverImage && (
-          <img
+          <Image
             src={post.coverImage}
             alt={post.title}
             className="w-full rounded-lg shadow mb-2"
@@ -73,9 +73,9 @@ export default async function PostPage({ params }: { params: { slug: string } })
           {/* EXISTING COMMENTS */}
           <div className="space-y-4 mt-6">
             {comments.length > 0 ? (
-              comments.map((c: any) => (
+              comments.map((c: any) => (   
                 <div
-                  key={c._id}
+                  key={c._id}   
                   className="p-4 bg-white dark:bg-zinc-800 rounded border border-gray-300 dark:border-gray-700"
                 >
                   <p className="font-semibold">{c.commenterName}</p>
