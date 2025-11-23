@@ -43,7 +43,7 @@ useEffect(() => {
 const isOnPatientsPage = pathname === '/patients';
 
   return (
-<section className="w-full py-10 sticky top-0 z-50 backdrop-blur-md shadow-md bg-zinc-100 dark:bg-zinc-900 text-dark-300 dark:text-zinc-200 transition-all duration-300 ease-in-out">
+<section className="w-full py-4 sticky top-0 z-50 backdrop-blur-md shadow-md bg-zinc-100 dark:bg-zinc-900 text-dark-300 dark:text-zinc-200 transition-all duration-300 ease-in-out">
 
 <div className=" flex justify-between items-center px-2 xl:px-2">
 

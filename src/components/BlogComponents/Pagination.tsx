@@ -1,4 +1,4 @@
-// components/Pagination.tsx
+"use client";
 import Link from "next/link";
 
 export default function Pagination({ page, pages }: { page: number; pages: number }) {

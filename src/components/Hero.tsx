@@ -16,7 +16,7 @@ const heroHeadings = [
 export default function Hero() {
  
 
-  // auto-slide logic (optional)
+
 
 
   return (

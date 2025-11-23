@@ -31,6 +31,9 @@
 @layer utilities {
 /* ===== UTILITIES */
 
+.bg-mode{
+  @apply bg-zinc-100 dark:bg-zinc-900 text-dark-300 dark:text-zinc-200
+}
 
   .navitem{
     @apply block px-2 py-2 whitespace-nowrap text-dark-300 dark:text-zinc-200 text-[1rem] xl:text-lg  rounded hover:text-blue-300 transition
@@ -455,4 +458,21 @@
 @keyframes marquee {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); } /* only half because we duplicate */
+}
+
+.dark .prose-dark-white {
+  color: #ffffff !important;
+}
+
+.dark .prose-dark-white p,
+.dark .prose-dark-white li,
+.dark .prose-dark-white span,
+.dark .prose-dark-white strong,
+.dark .prose-dark-white h1,
+.dark .prose-dark-white h2,
+.dark .prose-dark-white h3,
+.dark .prose-dark-white h4,
+.dark .prose-dark-white h5,
+.dark .prose-dark-white h6 {
+  color: #ffffff !important;
 }

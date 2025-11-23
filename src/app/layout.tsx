@@ -5,6 +5,9 @@ import "./globals.css";
 import {cn} from "./lib/utils"
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import LayoutShell from "@/components/LayoutShell";
+import { AuthProvider } from "@/context/AuthContext";
+import ClientProviders from "@/providers/ClientProviders";
+
 
 export const roboto = Roboto({
   subsets: ["latin"],
@@ -43,15 +46,10 @@ export default function RootLayout({
 
     <html lang="en">
   <body className={cn('min-h-screen font-sans antialias', fontSans.variable, roboto.variable, robotoCondensed.variable)}>
-      <ThemeProvider
-            attribute="class"
-            defaultTheme="light"
-         
-          >
-             <LayoutShell>
-            {children}
-          </LayoutShell>
-          </ThemeProvider>
+
+      <ClientProviders>
+            <LayoutShell>{children}</LayoutShell>
+        </ClientProviders>
       </body>
     </html>
 
