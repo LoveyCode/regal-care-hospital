@@ -1,8 +1,10 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from "framer-motion";
 import { ImagesSlider } from "./ui/ImagesSlider";
 import { heroImages } from "../../data";
+import Image from 'next/image';
 
 const heroHeadings = [
   "Welcome to Regal Care Hospital",
@@ -13,10 +15,29 @@ const heroHeadings = [
 
 ];
 
+
 export default function Hero() {
- 
+
+        const router = useRouter();
+
+    const [isLoading, setIsLoading] = useState(false);
 
 
+  const handleBookAppointment = () => {
+     setIsLoading(true)
+    router.push('/patients'); 
+  };
+
+  const pathname = usePathname();
+
+useEffect(() => {
+  if (pathname === '/patients') {
+    setIsLoading(false);
+  }
+}, [pathname]);
+
+
+const isOnPatientsPage = pathname === '/patients';
 
 
   return (
@@ -52,11 +73,43 @@ export default function Hero() {
 
               {/* Static Buttons */}
               <div className="mt-6 flex gap-4">
-         <button
-  className="
-  btn bg-yellow-600 before:bg-blue-300">
-  <span className="relative z-10">Book Appointment</span>
+
+
+<button
+  className="btn bg-yellow-600 before:bg-blue-300 mx-10 hidden lg:block"
+  disabled={isOnPatientsPage}
+  onClick={() => {
+    if (!isOnPatientsPage) handleBookAppointment();
+  }}
+>
+  {isLoading && !isOnPatientsPage ? (
+        <div className="flex items-center gap-4">
+          <Image
+            src="/assets/icons/loader.svg"
+            alt="loader"
+            width={20}
+            height={20}
+            className="animate-spin"
+          />
+
+          <p className='z-40'>Loading...</p>
+        </div>
+
+      ) : (
+         <div className="flex items-center gap-4">
+          <Image
+            src="/assets/icons/appointments.svg"
+            alt="loader"
+            width={20}
+            height={20}
+            className='invert brightness-0  '
+          
+          />
+         <p className='z-40'> Book Appointment</p>
+        </div>
+      )}  
 </button>
+
   <button
   className="  btn bg-yellow-600 before:bg-blue-300">
   <span className="relative z-10">Send Email</span>
@@ -69,3 +122,4 @@ export default function Hero() {
     </section>
   );
 }
+  
