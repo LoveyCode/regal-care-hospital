@@ -1,77 +1,20 @@
-"use client";
-import { useQuery } from "@tanstack/react-query";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Calendar } from "lucide-react";
-import { Skeleton } from "@/components/ui/skeleton";
+export const revalidate = 60; // valid now
+
+
+import ArchivesClient from "@/components/BlogComponents/ArchivesClient";
 import { Archive } from "../../../../types/blog";
 
-const monthNames = [
-  "January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
-];
-
-export const revalidate = 60;
-
-const Archives = () => {
-  const { data: archives, isLoading } = useQuery({
-    queryKey: ["archives"],
-    queryFn: async () => {
-      const res = await fetch("/api/archives");
-      if (!res.ok) throw new Error("Failed to load archives");
-      return res.json();
-    },
+export default async function Page() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/archives`, {
+    next: { revalidate: 60 },
   });
 
-  
+  if (!res.ok) {
+    console.error("Failed to fetch archives");
+    return <div>Error loading archives</div>;
+  }
 
-  return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold">Archives</h1>
-        <p className="text-muted-foreground">Browse posts by publication date</p>
-      </div>
+  const archives: Archive[] = await res.json();
 
-      {isLoading ? (
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <Card key={i}>
-              <CardHeader>
-                <Skeleton className="h-6 w-32" />
-              </CardHeader>
-              <CardContent>
-                <Skeleton className="h-4 w-24" />
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      ) : archives?.length === 0 ? (
-        <Card>
-          <CardContent className="flex min-h-[200px] items-center justify-center">
-            <p className="text-muted-foreground">No archives available</p>
-          </CardContent>
-        </Card>
-      ) : (
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {archives?.map((archive: Archive) => (
-            <Card key={`${archive._id.year}-${archive._id.month}`}>
-              <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-lg font-medium">
-                  {monthNames[archive._id.month - 1]} {archive._id.year}
-                </CardTitle>
-                <Calendar className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{archive.count}</div>
-                <p className="text-xs text-muted-foreground">
-                  {archive.count === 1 ? "post" : "posts"}
-                </p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-};
-
-export default Archives;
+  return <ArchivesClient archives={archives} />;
+}
