@@ -38,7 +38,7 @@ export default function CommentsClient() {
 
   const approveMutation = useMutation({
     mutationFn: async (id: string) => {
-      const res = await fetch(`/api/comments/byId/${id}`, { method: "PUT" });
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/comments/byId/${id}`, { method: "PUT" });
       if (!res.ok) throw new Error("Failed to approve");
       return res.json();
     },

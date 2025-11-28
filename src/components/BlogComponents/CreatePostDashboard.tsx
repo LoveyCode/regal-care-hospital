@@ -29,7 +29,7 @@ export default function CreatePostDashboard() {
   const { data: categories } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
-      const res = await fetch(`/api/categories`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/categories`);
       if (!res.ok) throw new Error("Failed to load categories");
       return res.json();
     },

@@ -22,7 +22,7 @@ export default function CategorySection({ category }: { category: string }) {
   const { data: commentCounts } = useQuery({
     queryKey: ["commentCounts"],
     queryFn: async () => {
-      const res = await fetch(`/api/comments/counts`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/comments/counts`);
       if (!res.ok) throw new Error("Failed to fetch comment counts");
       return res.json();
     },
