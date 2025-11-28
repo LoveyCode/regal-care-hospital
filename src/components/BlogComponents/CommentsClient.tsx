@@ -1,7 +1,5 @@
 "use client";
-
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-
 import { Button } from "@/components/ui/button";
 import { Check, Trash2 } from "lucide-react";
 import { toast } from "sonner";
@@ -31,7 +29,6 @@ export default function CommentsClient() {
       if (!res.ok) throw new Error("Failed to load comments");
       return res.json();
     },
-    refetchOnWindowFocus: false,
   });
 
   const approveMutation = useMutation({

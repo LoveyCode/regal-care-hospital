@@ -4,12 +4,17 @@ import { Calendar } from "lucide-react";
 import { Archive } from "../../../types/blog";
 
 
+
 const monthNames = [
   "January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
 ];
 
+
+
 export default function ArchivesClient({ archives }: { archives: Archive[] }) {
+
+
   return (
     <div className="space-y-6">
       <div>
