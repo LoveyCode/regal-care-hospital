@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getAllCategories, createCategory } from "@/apiServices/categoryServices";
+export const dynamic = "force-dynamic";
 
 export async function GET() {
   try {
@@ -16,7 +17,6 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const data = await request.json();
-    console.log("📩 Incoming category data:", data);
     const category = await createCategory(data);
     return NextResponse.json(category, { status: 201 });
   } catch (error: any) {
