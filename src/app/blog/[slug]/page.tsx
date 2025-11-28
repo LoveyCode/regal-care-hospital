@@ -5,7 +5,7 @@ import Link from "next/link";
 import CommentForm from "@/components/BlogComponents/CommentForm";
 import { getCommentsForPost } from "@/apiServices/commentServices";
 import Image from "next/image";
-
+export const dynamic = "force-dynamic";
 // Fetch comments by slug
 async function getComments(slug: string) {
   const res = await fetch(
