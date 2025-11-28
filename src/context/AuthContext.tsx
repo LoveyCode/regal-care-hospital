@@ -17,31 +17,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
-  // 🧠 On mount, check if cookie exists via API
-
-useEffect(() => {
-  const checkAuth = async () => {
-    setLoading(true); // ✅ move this to the start
-    try {
-      const res = await fetch("/api/dashboard/auth/verify", {
-        credentials: "include",
-      });
-
-      const data = await res.json(); // ✅ always parse JSON
-      setIsAuthenticated(data.authenticated || false);
-    } catch (err) {
-      console.error("Auth check failed:", err);
-      setIsAuthenticated(false);
-    } finally {
-      setLoading(false); // ✅ always stop loading after completion
-    }
-  };
-
-  checkAuth();
-}, []);
 
 
-  // ✅ Login using your Next.js API
   const login = async (username: string, password: string) => {
     try {
       const res = await fetch("/api/dashboard/auth/login", {

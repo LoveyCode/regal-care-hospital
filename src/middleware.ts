@@ -1,41 +1,50 @@
-import { jwtVerify } from "jose";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export const config = {
-  matcher: ["/dashboard", "/dashboard/:path*", "/dashboard/auth/login"],
+  matcher: ["/dashboard/:path*", "/dashboard"],
 };
 
-const secret = new TextEncoder().encode(process.env.JWT_SECRET);
+const SECRET = process.env.JWT_SECRET!;
 
-async function verifyJWT(token: string) {
+async function verify(token: string) {
   try {
-    await jwtVerify(token, secret);
-    return true;
-  } catch (err) {
-    console.error("JWT verify failed:", err);
+    const [header, payload, signature] = token.split(".");
+    const encoder = new TextEncoder();
+
+    const data = `${header}.${payload}`;
+    const key = await crypto.subtle.importKey(
+      "raw",
+      encoder.encode(SECRET),
+      { name: "HMAC", hash: "SHA-256" },
+      false,
+      ["verify"]
+    );
+
+    const isValid = await crypto.subtle.verify(
+      "HMAC",
+      key,
+      Uint8Array.from(atob(signature), c => c.charCodeAt(0)),
+      encoder.encode(data)
+    );
+
+    return isValid;
+  } catch {
     return false;
   }
 }
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
-  const token = req.cookies.get("adminToken")?.value;
 
-  // 🚫 Skip JWT check for login route
-  if (pathname === "/dashboard/auth/login") {
-    if (token && (await verifyJWT(token))) {
-      // Already logged in → go to dashboard
-      return NextResponse.redirect(new URL("/dashboard", req.url));
-    }
+  if (pathname.startsWith("/dashboard/auth")) {
     return NextResponse.next();
   }
 
-  // ✅ Protect all /dashboard routes except /dashboard/auth/login
-  if (pathname.startsWith("/dashboard")) {
-    if (!token || !(await verifyJWT(token))) {
-      return NextResponse.redirect(new URL("/dashboard/auth/login", req.url));
-    }
+  const token = req.cookies.get("adminToken")?.value;
+
+  if (!token || !(await verify(token))) {
+    return NextResponse.redirect(new URL("/dashboard/auth/login", req.url));
   }
 
   return NextResponse.next();

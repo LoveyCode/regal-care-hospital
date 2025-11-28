@@ -17,15 +17,16 @@ if (username !== BLOGADMIN_USERNAME || password !== BLOGADMIN_PASSWORD) {
   const token = jwt.sign({ role: username }, JWT_SECRET, { expiresIn: "1h" });
 
 const res = NextResponse.json({ success: true });
-  res.cookies.set({
-    name: "adminToken",
-    value: token,
-    httpOnly: true,
-    path: "/",          // ✅ make cookie available for all routes
-    sameSite: "lax", 
-    secure: process.env.NODE_ENV === "production",
-    maxAge: 60 * 60,    // 1 hour
-  });
+res.cookies.set({
+  name: "adminToken",
+  value: token,
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+  sameSite: "lax",      // IMPORTANT
+  path: "/",
+  maxAge: 60 * 60, 
+});
+
 
   return res;
 }
