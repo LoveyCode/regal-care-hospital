@@ -2,17 +2,23 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/dashboard"],
+  matcher: ["/dashboard/:path*"], // this covers /dashboard and all children
 };
 
 const SECRET = process.env.JWT_SECRET!;
 
-async function verify(token: string) {
+// Safe Base64 decoder
+function decodeB64(str: string) {
+  return Uint8Array.from(Buffer.from(str, "base64"));
+}
+
+async function verifyToken(token: string) {
   try {
     const [header, payload, signature] = token.split(".");
+    if (!header || !payload || !signature) return false;
+
     const encoder = new TextEncoder();
 
-    const data = `${header}.${payload}`;
     const key = await crypto.subtle.importKey(
       "raw",
       encoder.encode(SECRET),
@@ -21,36 +27,50 @@ async function verify(token: string) {
       ["verify"]
     );
 
-    const isValid = await crypto.subtle.verify(
+    const valid = await crypto.subtle.verify(
       "HMAC",
       key,
-      Uint8Array.from(atob(signature), c => c.charCodeAt(0)),
-      encoder.encode(data)
+      decodeB64(signature),
+      encoder.encode(`${header}.${payload}`)
     );
 
-    return isValid;
-  } catch {
+    return valid;
+  } catch (err) {
+    console.error("Token verification failed:", err);
     return false;
   }
 }
 
 export async function middleware(req: NextRequest) {
-  const { pathname } = req.nextUrl;
-console.log("Middleware hit:", pathname);
-  if (pathname.startsWith("/dashboard/auth")) {
+  const path = req.nextUrl.pathname;
+
+  console.log("---- MIDDLEWARE RUNNING ----");
+  console.log("Path:", path);
+
+  // Allow auth pages
+  if (path.startsWith("/dashboard/auth")) {
+    console.log("Auth route — allow");
     return NextResponse.next();
   }
 
   const token = req.cookies.get("adminToken")?.value;
- console.log("Cookie value:", token);
+  console.log("Token exists:", !!token);
 
-  const isValid = token ? await verify(token) : false;
-  console.log("Token valid:", isValid); 
-
-   if (!token || !isValid) {
-    console.log("Redirecting to login");
+  // No token → redirect
+  if (!token) {
+    console.log("No token → redirect to login");
     return NextResponse.redirect(new URL("/dashboard/auth/login", req.url));
   }
 
+  // Validate token
+  const valid = await verifyToken(token);
+  console.log("Token valid:", valid);
+
+  if (!valid) {
+    console.log("Invalid token → redirect to login");
+    return NextResponse.redirect(new URL("/dashboard/auth/login", req.url));
+  }
+
+  console.log("Token OK → allow dashboard");
   return NextResponse.next();
 }

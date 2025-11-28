@@ -26,5 +26,6 @@ res.cookies.set({
   secure: process.env.NODE_ENV === "production", // must be HTTPS
   maxAge: 60 * 60,
 });
+
   return res;
 }

@@ -1,4 +1,5 @@
 "use client";
+
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -17,15 +18,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
+  // No verification request anymore — middleware protects routes
+  useEffect(() => {
+    setLoading(false);
+  }, []);
 
-
+  // Login
   const login = async (username: string, password: string) => {
     try {
       const res = await fetch("/api/dashboard/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
-        credentials: "include", // Important: allows cookies to be set
+        credentials: "include",
       });
 
       if (!res.ok) {
@@ -34,8 +39,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         throw new Error(err.error || "Invalid credentials");
       }
 
-      toast.success("Login successful!");
       setIsAuthenticated(true);
+      toast.success("Login successful!");
       router.push("/dashboard");
     } catch (err) {
       console.error(err);
@@ -43,16 +48,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  // ✅ Logout by clearing cookie via API
+  // Logout
   const logout = async () => {
     try {
       await fetch("/api/dashboard/auth/logout", {
         method: "POST",
         credentials: "include",
       });
+
       setIsAuthenticated(false);
       toast.success("Logged out successfully");
-      router.push("/dashboard/login");
+      router.push("/dashboard/auth/login");
     } catch (err) {
       console.error(err);
       toast.error("Logout failed");
@@ -68,6 +74,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
-  if (!context) throw new Error("useAuth must be used within an AuthProvider");
+  if (!context) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
   return context;
 };
