@@ -5,6 +5,7 @@ import SectionHeading from "@/components/sectionHeading";
 import Link from "next/link";
 
 export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 async function fetchPostsByCategory(category: string) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/blogPosts/category/${category}`, {

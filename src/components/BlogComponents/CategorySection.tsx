@@ -6,6 +6,7 @@ import { IPost } from "../../../types/blog";
 import Image from "next/image";
 import useSWR from "swr";
 
+export const dynamic = "force-dynamic";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -224,3 +225,6 @@ export default function CategorySection({ category }: { category: string }) {
     </section>
   );
 }
+
+
+

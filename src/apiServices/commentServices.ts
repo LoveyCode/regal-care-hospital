@@ -15,8 +15,6 @@ export async function createComment(payload: {
   const { postSlug, commenterName, commenterEmail, content } = payload;
 
   await connectDB();
-
-  
   // Fetch the post to get title + category
 const post = await Post.findOne({ slug: postSlug }).lean<IPost>();
 
@@ -29,7 +27,6 @@ const post = await Post.findOne({ slug: postSlug }).lean<IPost>();
     content,
     approved: false,
   });
-
   return comment.save();
 }
 
@@ -52,14 +49,12 @@ export async function getCommentsForPost(slug: string) {
     .exec();
 }
 
-
-
 export async function updateComment(id: string, data: Partial<IComment>) {
   await connectDB();
   return Comment.findByIdAndUpdate(id, data, { new: true })
     .lean<IComment>()
     .exec();
-}
+} 
 
 export async function deleteComment(id: string) {
   await connectDB();

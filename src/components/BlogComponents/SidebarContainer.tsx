@@ -3,6 +3,7 @@ import { useState } from "react";
 import Sidebar from "@/components/BlogComponents/Sidebar";
 import { AuthProvider } from "@/context/AuthContext";
 import { Menu } from "lucide-react";
+import { ToasterProvider } from "@/providers/ToasterProvider";
 
 export default function SidebarContainer({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -14,6 +15,7 @@ export default function SidebarContainer({ children }: { children: React.ReactNo
 
       {/* Main content */}
       <AuthProvider>
+     
         <div className="flex flex-1 flex-col bg-zinc-100 dark:bg-zinc-900">
 
           {/* Mobile menu button */}

@@ -1,4 +1,5 @@
 import SidebarContainer from "@/components/BlogComponents/SidebarContainer";
+import { ToasterProvider } from "@/providers/ToasterProvider";
 
 export default function DashboardLayout({
   children,
@@ -10,8 +11,10 @@ export default function DashboardLayout({
 
     <SidebarContainer>
      
+     
           <main className="flex-1 p-4 lg:p-6 bg-zinc-100 dark:bg-zinc-900 text-dark-300 dark:text-zinc-200">{children}</main>
         
+
     </SidebarContainer>
 
     </div>

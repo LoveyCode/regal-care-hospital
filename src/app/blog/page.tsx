@@ -41,16 +41,15 @@ export default async function BlogPage() {
       <Ticker />
 
       <section className="w-full lg:pt-10 px-4 lg:px-5 pb-10 gap-4">
-         {/* <section className="w-full py-10 px-4 grid grid-cols-1 lg:grid-cols-[3fr_1fr] gap-8"></section> */}
+      
         <div>
           <div> 
-          {/* Latest Posts */}
           <SectionHeading title={<h1 className="header text-left">Latest Posts</h1>} />
           <LatestPost />
           </div>
 
               <div className="lg:px-20 px-5">
-          {/* Dynamic Category Sections */}
+    
           {categories.map((cat) => (
             <div key={cat._id} className="mt-12">
               <SectionHeading title={<h2 className="header mt-20 text-left">{cat.name}</h2>} />
@@ -96,7 +95,7 @@ export default async function BlogPage() {
 </div>
 
 
-          {/* Recent Comments */}
+        
           <div>
            <h1 className="font-condensed text-xl lg:text-2xl xl:text-3xl  font-bold text-left">Recent Comments</h1>
             <ul className="space-y-3 text-sm text-gray-600 dark:text-gray-300">

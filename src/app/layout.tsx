@@ -48,10 +48,11 @@ export default function RootLayout({
     <html lang="en">
   <body className={cn('min-h-screen font-sans antialias', fontSans.variable, roboto.variable, robotoCondensed.variable)}>
 
-       <ToasterProvider />
+       
       <ClientProviders>
             <LayoutShell>{children}</LayoutShell>
         </ClientProviders>
+        <ToasterProvider />
       </body>
     </html>
 
