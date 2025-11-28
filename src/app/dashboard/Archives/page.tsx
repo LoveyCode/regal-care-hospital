@@ -1,7 +1,6 @@
-export const dynamic = "force-dynamic";
-
 import ArchivesClient from "@/components/BlogComponents/ArchivesClient";
 
+export const dynamic = "force-dynamic";
 export default function Page() {
   return <ArchivesClient />;
 }
