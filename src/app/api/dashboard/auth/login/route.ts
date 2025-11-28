@@ -21,12 +21,10 @@ res.cookies.set({
   name: "adminToken",
   value: token,
   httpOnly: true,
-  secure: process.env.NODE_ENV === "production",
-  sameSite: "lax",      // IMPORTANT
-  path: "/",
-  maxAge: 60 * 60, 
+  path: "/",          
+  sameSite: "lax", 
+  secure: process.env.NODE_ENV === "production", // must be HTTPS
+  maxAge: 60 * 60,
 });
-
-
   return res;
 }

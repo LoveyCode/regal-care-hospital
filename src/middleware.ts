@@ -36,14 +36,19 @@ async function verify(token: string) {
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
-
+console.log("Middleware hit:", pathname);
   if (pathname.startsWith("/dashboard/auth")) {
     return NextResponse.next();
   }
 
   const token = req.cookies.get("adminToken")?.value;
+ console.log("Cookie value:", token);
 
-  if (!token || !(await verify(token))) {
+  const isValid = token ? await verify(token) : false;
+  console.log("Token valid:", isValid); 
+
+   if (!token || !isValid) {
+    console.log("Redirecting to login");
     return NextResponse.redirect(new URL("/dashboard/auth/login", req.url));
   }
 
