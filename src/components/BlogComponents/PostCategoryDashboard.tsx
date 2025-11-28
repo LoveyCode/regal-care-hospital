@@ -1,11 +1,9 @@
 "use client";
-
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import {
   Table,
   TableBody,
@@ -34,18 +32,14 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { ICategory } from "../../../../types/blog";
-import slugify from "slugify";
+import { ICategory } from "../../../types/blog";
+
 
 const Categories = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingCategory, setEditingCategory] = useState<ICategory | null>(null);
   const [deleteId, setDeleteId] = useState<string | null>(null);
-  const [formData, setFormData] = useState({
-    name: "",
-    slug: "",
-    description: "",
-  });
+  const [formData, setFormData] = useState({ name: "" });
 
   const queryClient = useQueryClient();
 
@@ -59,20 +53,13 @@ const Categories = () => {
     },
   });
 
-  // ✅ Create category mutation
+  // ✅ Create category
   const createMutation = useMutation({
-    mutationFn: async (newCategory: Omit<ICategory, "_id">) => {
-      // clean payload before sending
-      const payload = {
-        ...newCategory,
-        slug:
-          newCategory.slug?.trim() ||
-          slugify(newCategory.name, { lower: true, strict: true }),
-      };
+    mutationFn: async (newCategory: { name: string }) => {
       const res = await fetch("/api/categories", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(newCategory),
       });
       if (!res.ok) throw new Error("Failed to create category");
       return res.json();
@@ -90,16 +77,10 @@ const Categories = () => {
   // ✅ Update category
   const updateMutation = useMutation({
     mutationFn: async ({ id, data }: { id: string; data: Partial<ICategory> }) => {
-      const payload = {
-        ...data,
-        slug:
-          data.slug?.trim() ||
-          slugify(data.name || "", { lower: true, strict: true }),
-      };
       const res = await fetch(`/api/categories/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(data),
       });
       if (!res.ok) throw new Error("Failed to update category");
       return res.json();
@@ -133,14 +114,10 @@ const Categories = () => {
   const openDialog = (category?: ICategory) => {
     if (category) {
       setEditingCategory(category);
-      setFormData({
-        name: category.name,
-        slug: category.slug,
-        description: category.description || "",
-      });
+      setFormData({ name: category.name });
     } else {
       setEditingCategory(null);
-      setFormData({ name: "", slug: "", description: "" });
+      setFormData({ name: "" });
     }
     setIsDialogOpen(true);
   };
@@ -148,32 +125,28 @@ const Categories = () => {
   const closeDialog = () => {
     setIsDialogOpen(false);
     setEditingCategory(null);
-    setFormData({ name: "", slug: "", description: "" });
+    setFormData({ name: "" });
   };
 
-  // ✅ Handle submit
+  // ✅ Handle form submit
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    const cleanData = { ...formData };
-    delete (cleanData as any)._id; // ensure no _id gets sent
-
     if (editingCategory) {
-      updateMutation.mutate({ id: editingCategory._id, data: cleanData });
+      updateMutation.mutate({ id: editingCategory._id!, data: formData });
     } else {
-      createMutation.mutate(cleanData as any);
+      createMutation.mutate(formData);
     }
   };
 
   const handleDelete = (id: string) => deleteMutation.mutate(id);
 
-  // ✅ JSX
+  // ✅ UI
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">Categories</h1>
-          <p className="text-muted-foreground">Organize your blog content</p>
+          <p className="text-muted-foreground">Manage your blog categories</p>
         </div>
         <Button onClick={() => openDialog()}>
           <Plus className="mr-2 h-4 w-4" />
@@ -186,22 +159,19 @@ const Categories = () => {
           <TableHeader>
             <TableRow>
               <TableHead>Name</TableHead>
-              <TableHead>Slug</TableHead>
-              <TableHead>Description</TableHead>
-              <TableHead>Posts</TableHead>
               <TableHead className="text-right">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {isLoading ? (
               <TableRow>
-                <TableCell colSpan={5} className="text-center">
+                <TableCell colSpan={3} className="text-center">
                   Loading...
                 </TableCell>
               </TableRow>
             ) : categories?.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={5} className="text-center text-muted-foreground">
+                <TableCell colSpan={3} className="text-center text-muted-foreground">
                   No categories found
                 </TableCell>
               </TableRow>
@@ -209,11 +179,7 @@ const Categories = () => {
               categories?.map((category: ICategory) => (
                 <TableRow key={category._id}>
                   <TableCell className="font-medium">{category.name}</TableCell>
-                  <TableCell className="font-mono text-sm">{category.slug}</TableCell>
-                  <TableCell className="max-w-xs truncate">
-                    {category.description || "—"}
-                  </TableCell>
-                  <TableCell>{category.postCount || 0}</TableCell>
+                  <TableCell>{category.postCount ?? 0}</TableCell>
                   <TableCell className="text-right">
                     <div className="flex justify-end gap-2">
                       <Button
@@ -226,7 +192,7 @@ const Categories = () => {
                       <Button
                         variant="ghost"
                         size="icon"
-                        onClick={() => setDeleteId(category._id)}
+                        onClick={() => setDeleteId(category._id!)}
                       >
                         <Trash2 className="h-4 w-4 text-destructive" />
                       </Button>
@@ -246,8 +212,8 @@ const Categories = () => {
             <DialogTitle>{editingCategory ? "Edit Category" : "Add Category"}</DialogTitle>
             <DialogDescription>
               {editingCategory
-                ? "Update the category details"
-                : "Create a new category for your posts"}
+                ? "Update the category name."
+                : "Create a new category for your posts."}
             </DialogDescription>
           </DialogHeader>
           <form onSubmit={handleSubmit}>
@@ -257,41 +223,9 @@ const Categories = () => {
                 <Input
                   id="name"
                   value={formData.name}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      name: e.target.value,
-                      slug: slugify(e.target.value, { lower: true, strict: true })
-                    })
-                  }
+                  onChange={(e) => setFormData({ name: e.target.value })}
                   placeholder="Technology"
                   required
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="slug">Slug</Label>
-                <Input
-                  id="slug"
-                  value={formData.slug}
-                  onChange={(e) =>
-                    setFormData({ ...formData, slug: e.target.value })
-                  }
-                  placeholder="technology"
-                  required
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="description">Description</Label>
-                <Textarea
-                  id="description"
-                  value={formData.description}
-                  onChange={(e) =>
-                    setFormData({ ...formData, description: e.target.value })
-                  }
-                  placeholder="Articles about technology and innovation"
-                  rows={3}
                 />
               </div>
             </div>
@@ -310,7 +244,7 @@ const Categories = () => {
         </DialogContent>
       </Dialog>
 
-      {/* Delete confirmation */}
+      {/* Delete Confirmation */}
       <AlertDialog open={!!deleteId} onOpenChange={() => setDeleteId(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>

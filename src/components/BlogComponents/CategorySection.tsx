@@ -4,19 +4,19 @@ import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { IPost } from "../../../types/blog";
 import Image from "next/image";
+import useSWR from "swr";
+
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function CategorySection({ category }: { category: string }) {
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["postsByCategory", category],
-    queryFn: async () => {
-      const res = await fetch(
-        `/api/blogPosts/category/${category}?limit=3&publishedOnly=true`
-      );
-      if (!res.ok) throw new Error("Failed to fetch category posts");
-      return res.json();
-    },
-    enabled: !!category, // ensures it only runs if category is defined
-  });
+// Fetch posts with SWR
+    const { data, isLoading, error } = useSWR(
+      `/api/blogPosts/category/${category}?limit=6&publishedOnly=true`,
+      fetcher,
+      { revalidateOnFocus: false }
+    );
+  
 
   // 🔹 Fetch comment counts
   const { data: commentCounts } = useQuery({
@@ -59,9 +59,6 @@ export default function CategorySection({ category }: { category: string }) {
 };
 
   return (
- 
-
-
     <section className="w-full flex flex-col mx-2 my-20">
       <div className="w-full grid grid-cols-1 lg:grid-cols-[2fr_1fr_1fr] gap-6 h-auto lg:h-[500px]">
         {/* --- Big Box (Latest Post) --- */}
@@ -73,6 +70,8 @@ export default function CategorySection({ category }: { category: string }) {
           <Image
             src={latest.coverImage || "/placeholder.jpg"}
             alt={latest.title}
+            width={800} 
+            height={400}
             className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
           </div>
@@ -80,6 +79,8 @@ export default function CategorySection({ category }: { category: string }) {
                <Image
             src={latest.coverImage || "/placeholder.jpg"}
             alt={latest.title}
+            width={800}
+            height={400}
             className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
          
@@ -114,6 +115,8 @@ export default function CategorySection({ category }: { category: string }) {
               <Image
                 src={post.coverImage || "/placeholder.jpg"}
                 alt={post.title}
+                width={800}
+                height={400}
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-black/50"></div>
@@ -144,9 +147,11 @@ export default function CategorySection({ category }: { category: string }) {
               href={`/blog/${post.slug}`}
               className="relative rounded-xl overflow-hidden group"
             >
-              <img
+              <Image
                 src={post.coverImage || "/placeholder.jpg"}
                 alt={post.title}
+                width={800}
+                height={400}
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-black/50"></div>
@@ -180,9 +185,11 @@ export default function CategorySection({ category }: { category: string }) {
           <div className="block lg:hidden">
             <div className="relative grid grid-cols-[1fr_2fr] ">   
             <div className="relative flex flex-1 w-[100px] h-[100px] lg:h-full lg:w-full">
-            <img
+            <Image
               src={post.coverImage || "/placeholder.jpg"}
               alt={post.title}
+              width={800}
+              height={400}
               className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
             </div>
@@ -206,13 +213,8 @@ export default function CategorySection({ category }: { category: string }) {
       </Link>
         ))}
       </div>
-     
-
-
-
       </div>
       <p className="text-right mt-4 text-lg lg:text-2xl text-gray-600 hover:text-blue-300 cursor-pointer">
-     
             <Link
          href={`/blog/category/${encodeURIComponent(category)}`}
          >   

@@ -5,29 +5,30 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
+import useSWR from "swr";
 
 type Category = {
   _id: string;
   name: string;
 };
 
+const fetcher = (url: string) =>
+  fetch(url).then((res) => {
+    if (!res.ok) throw new Error("Failed to fetch categories");
+    return res.json();
+  });
+
 export default function BlogNavbar() {
   const [open, setOpen] = useState(false);
 
   // ----- FETCH CATEGORIES -----
-  const {
-    data: categories,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ["categories"],
-    queryFn: async () => {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/categories`);
-      if (!res.ok) throw new Error("Failed to fetch categories");
-      return res.json();
-    },
-    refetchOnWindowFocus: false,
-  });
+  const { data: categories, error, isLoading } = useSWR(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/categories`,
+    fetcher,
+    {
+      revalidateOnFocus: false,
+    }
+  );
 
   return (
     <nav className="w-full bg-blue-300 text-white">

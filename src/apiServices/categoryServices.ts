@@ -1,6 +1,7 @@
 import { connectDB } from "@/lib/mongodb";
 import { Category } from "@/models/category";
 import { ICategory } from "../../types/blog";
+import { Post } from "@/models/post";
 
 export async function getAllCategories() {
   await connectDB();
@@ -22,9 +23,11 @@ export async function createCategory(data: { name: string }) {
   const existing = await Category.findOne({ name: data.name });
   if (existing) throw new Error("Category already exists");
 
+    const postCount = await Post.countDocuments({ category: data.name });
+
   const category = new Category({
     name: data.name,
-    postCount: 0,
+    postCount,
   });
 
   await category.save();

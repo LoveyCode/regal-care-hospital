@@ -1,9 +1,8 @@
 export const revalidate = 60; // valid now
-
-
 import ArchivesClient from "@/components/BlogComponents/ArchivesClient";
 import { Archive } from "../../../../types/blog";
 
+export const dynamic = "force-dynamic"; 
 export default async function Page() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/archives`, {
     next: { revalidate: 60 },

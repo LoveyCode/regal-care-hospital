@@ -24,7 +24,10 @@ export default function FeatureImageCard({ watch, setValue, setShowImageModal }:
             <Image
               src={watch("coverImage")}
               alt="Cover Preview"
+             width={800}
+              height={400}
               className="rounded-md border w-full h-48 object-cover"
+
             />
             <Button
               variant="destructive"

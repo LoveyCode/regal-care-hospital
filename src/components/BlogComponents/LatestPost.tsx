@@ -88,8 +88,6 @@ const getCount = (slug?: string) => {
 };
 
 
-
-
   return (
       <motion.article
       initial={{ opacity: 0, y: 20 }}
@@ -108,6 +106,8 @@ const getCount = (slug?: string) => {
         <Image
           src={latest.coverImage || "/placeholder.jpg"}
           alt={latest.title}
+          width={800}
+          height={400}
           className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
         </div>
@@ -115,6 +115,8 @@ const getCount = (slug?: string) => {
            <Image
           src={latest.coverImage || "/placeholder.jpg"}
           alt={latest.title}
+          width={800}
+          height={400}
           className="absolute inset-0 w-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
 
@@ -152,6 +154,8 @@ const getCount = (slug?: string) => {
             <Image
               src={post.coverImage || "/placeholder.jpg"}
               alt={post.title}
+              width={800}
+              height={400}
               className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
             </div>
@@ -180,6 +184,8 @@ const getCount = (slug?: string) => {
               <Image
               src={post.coverImage || "/placeholder.jpg"}
               alt={post.title}
+              width={800}
+              height={400}
               className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
            

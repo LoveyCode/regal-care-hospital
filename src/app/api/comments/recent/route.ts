@@ -4,6 +4,6 @@ import { NextResponse } from "next/server";
 
 
 export async function GET() {
-    const recentComments = await getRecentComments(5);
+    const recentComments = await getRecentComments(10);
     return NextResponse.json(recentComments);
 }

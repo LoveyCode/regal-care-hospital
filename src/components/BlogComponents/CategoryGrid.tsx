@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { IPost } from "../../../types/blog";
+import Image from "next/image";
 
 
 type Props = { posts: IPost[] };
@@ -20,7 +21,7 @@ export default function CategoryGrid({ posts }: Props) {
           className="bg-white dark:bg-zinc-800 rounded-lg overflow-hidden shadow"
         >
           <Link href={`/blog/${p.slug}`} className="block relative h-44">
-            <img
+            <Image
               src={p.coverImage || "/placeholder.jpg"}
               alt={p.title}
               className="w-full h-full object-cover"

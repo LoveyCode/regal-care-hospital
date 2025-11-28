@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/ui/theme-provider";
 import LayoutShell from "@/components/LayoutShell";
 import { AuthProvider } from "@/context/AuthContext";
 import ClientProviders from "@/providers/ClientProviders";
+import { ToasterProvider } from "@/providers/ToasterProvider";
 
 
 export const roboto = Roboto({
@@ -47,6 +48,7 @@ export default function RootLayout({
     <html lang="en">
   <body className={cn('min-h-screen font-sans antialias', fontSans.variable, roboto.variable, robotoCondensed.variable)}>
 
+       <ToasterProvider />
       <ClientProviders>
             <LayoutShell>{children}</LayoutShell>
         </ClientProviders>
