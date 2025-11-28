@@ -1,13 +1,7 @@
 "use client";
-
 import { ColumnDef } from "@tanstack/react-table";
 import Image from "next/image";
-
-
 import { formatDateTime } from "@/lib/utils";
-
-
-
 import { StatusBadge } from "../StatusBadge";
 import { Doctors } from "../../../constants";
 import { Appointment } from "../../../types/appwrite.type";
